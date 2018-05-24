@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Do Faster</string>
+    <string name="scores">Scores</string>
+    <string name="start">Let\'s GO</string>
+    <string name="no_score">There\'s no score yet!</string>
+    <string name="default_user_name">Unknown</string>
+
+    <!-- Main Activity -->
+    <string name="speed_match">Speed Match</string>
+    <string name="which_one_is_larger">Which One Is Larger</string>
+    <string name="larger_than_1">54 > 21</string>
+    <string name="larger_than_2">70 = 70</string>
+    <string name="user_name_hint">Enter your name</string>
+
+    <!-- Speed Match -->
+    <string name="welcome_speed">Welcome To Speed Match\n%s!</string>
+    <string name="both">Both</string>
+    <string name="one_of_them">One Of Them</string>
+    <string name="no_one">No One</string>
+    <string name="look_speed">Look at the shape, carefully!</string>
+    <string name="time_is_up">Time\'s UP</string>
+
+    <!-- Which One-->
+    <string name="welcome_which">Welcome To Which One Is Larger\n%s!</string>
+    <string name="equal_sign">=</string>
+    <string name="look_which">Which number in the buttons is\nLARGER?!</string>
+
+</resources>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/repeated_background"
+    android:clickable="true"
+    android:focusable="true">
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        android:rotation="180"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/which_one_points_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="@dimen/eight_dp"
+        android:layout_marginRight="@dimen/eight_dp"
+        android:src="@drawable/points_icon"
+        android:tint="@color/icons"
+        app:layout_constraintRight_toLeftOf="@id/which_one_points_value"
+        app:layout_constraintTop_toTopOf="@id/which_one_points_value" />
+
+    <TextView
+        android:id="@+id/which_one_points_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="0"
+        android:textColor="@color/text"
+        android:textSize="50sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/which_one_timer_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="@dimen/eight_dp"
+        android:layout_marginStart="@dimen/eight_dp"
+        android:src="@drawable/timer_icon"
+        android:tint="@color/icons"
+        app:layout_constraintLeft_toRightOf="@id/which_one_timer_value"
+        app:layout_constraintTop_toTopOf="@id/which_one_timer_value" />
+
+    <TextView
+        android:id="@+id/which_one_timer_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="0"
+        android:textColor="@color/text"
+        android:textSize="50sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/which_one_evaluate_sign"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/which_one_points_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/which_one_points_value"
+        app:layout_constraintVertical_bias="1" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/which_one_buttons_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/which_one_caution"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/which_one_points_value">
+
+        <Button
+            android:id="@+id/which_one_left_button"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@drawable/btn_which_one"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text=":D"
+            android:textColor="@color/text"
+            android:textSize="75sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/which_one_right_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/which_one_right_button"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@drawable/btn_which_one"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text=";)"
+            android:textColor="@color/text"
+            android:textSize="75sp"
+            app:layout_constraintLeft_toRightOf="@id/which_one_left_button"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/which_one_bottom_button"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@drawable/btn_which_one"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/equal_sign"
+            android:textColor="@color/text"
+            android:textSize="75sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/which_one_left_button" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/which_one_caution"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginRight="@dimen/sixteen_dp"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/eight_dp"
+        android:lineSpacingMultiplier="1"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/look_which"
+        android:textColor="@color/text"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/which_one_buttons_container" />
+
+</android.support.constraint.ConstraintLayout>

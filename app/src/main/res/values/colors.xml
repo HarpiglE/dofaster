@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="speed_match_yellow">#e4ab00</color>
+    <color name="speed_match_red">#e40004</color>
+    <color name="speed_match_green">#217306</color>
+    <color name="speed_match_blue">#00a3e4</color>
+    <color name="text">#ffedcd</color>
+    <color name="icons">#f9b234</color>
+    <color name="card_view">#fffaf0</color>
+    <color name="buttons_bg">#060e21</color>
+    <color name="black">#000000</color>
+
+
+    <color name="main_activity_edit_text">#aafffaf0</color>
+
+</resources>
