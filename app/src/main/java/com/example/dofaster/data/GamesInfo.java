@@ -1,4 +1,4 @@
-package com.example.dofaster;
+package com.example.dofaster.data;
 
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;

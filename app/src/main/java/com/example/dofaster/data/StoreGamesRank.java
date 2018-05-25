@@ -1,4 +1,4 @@
-package com.example.dofaster;
+package com.example.dofaster.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;

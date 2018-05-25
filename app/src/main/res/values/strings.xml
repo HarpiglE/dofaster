@@ -2,7 +2,7 @@
     <string name="app_name">Do Faster</string>
     <string name="scores">Scores</string>
     <string name="start">Let\'s GO</string>
-    <string name="no_score">There\'s no score yet!</string>
+    <string name="no_score">در حال حاضر امتیازی ثبت نشده است</string>
     <string name="default_user_name">Unknown</string>
 
     <!-- Main Activity -->

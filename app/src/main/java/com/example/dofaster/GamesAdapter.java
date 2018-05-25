@@ -8,19 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dofaster.data.GamesInfo;
+
 import java.util.List;
 
 public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> {
 
     private List<GamesInfo> gamesInfoList;
 
-    private ScoreListClickListener scoreListClickListener;
+    private MainActivityClickListener mainActivityClickListener;
 
     public GamesAdapter(
-            List<GamesInfo> gamesInfoList, ScoreListClickListener scoreListClickListener
+            List<GamesInfo> gamesInfoList, MainActivityClickListener mainActivityClickListener
     ) {
         this.gamesInfoList = gamesInfoList;
-        this.scoreListClickListener = scoreListClickListener;
+        this.mainActivityClickListener = mainActivityClickListener;
     }
 
     @Override
@@ -70,22 +72,30 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         public void onClick(View v) {
 //            Log.i("TAG", "" + v.getId());
             if (v.getId() == 2131230775) {
+                // Handling game picture clicks which calls item 0
                 switch (getAdapterPosition()) {
                     case 0:
+                        mainActivityClickListener.whichClicked(0, 0);
                         break;
                     case 1:
 //                        Log.i("TAG", "man");
+                        mainActivityClickListener.whichClicked(0, 1);
                         break;
                     case 2:
+                        mainActivityClickListener.whichClicked(0, 2);
                         break;
                 }
             } else {
+                // Handling game ranks clicks which calls item 1
                 switch (getAdapterPosition()) {
                     case 0:
+                        mainActivityClickListener.whichClicked(1, 0);
                         break;
                     case 1:
+                        mainActivityClickListener.whichClicked(1, 1);
                         break;
                     case 2:
+                        mainActivityClickListener.whichClicked(1, 2);
 //                        Log.i("TAG", "to");
                         break;
                 }

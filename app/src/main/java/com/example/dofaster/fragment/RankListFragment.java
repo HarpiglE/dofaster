@@ -12,25 +12,43 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.dofaster.R;
-import com.example.dofaster.RankList;
+import com.example.dofaster.data.RankList;
 import com.example.dofaster.RankListAdapter;
-import com.example.dofaster.StoreGamesRank;
-import com.example.dofaster.User;
+import com.example.dofaster.data.StoreGamesRank;
+import com.example.dofaster.data.User;
 
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SpeedMatchScoreListFragment extends Fragment {
+public class RankListFragment extends Fragment {
 
     private RecyclerView rankList;
 
-    public SpeedMatchScoreListFragment() {
+    private String sharedPreferencesName;
+
+    public RankListFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        if (getArguments() != null) {
+            switch (getArguments().getInt("id")) {
+                case 0:
+                    sharedPreferencesName = getArguments().getString("chalkboard_challenge");
+                    break;
+                case 1:
+                    sharedPreferencesName = getArguments().getString("color_match");
+                    break;
+                case 2:
+                    sharedPreferencesName = getArguments().getString("speed_match");
+                    break;
+            }
+        }
         return inflater.inflate(R.layout.fragment_rank_list, container, false);
     }
 
@@ -41,7 +59,7 @@ public class SpeedMatchScoreListFragment extends Fragment {
         findView(view);
 
         if (StoreGamesRank
-                .getInstance(getContext(), "Speed_Match")
+                .getInstance(getContext(), sharedPreferencesName)
                 .getScoreList()
                 .getRankList()
                 .size() == 0) {
@@ -52,12 +70,12 @@ public class SpeedMatchScoreListFragment extends Fragment {
     }
 
     private void findView(View view) {
-        rankList = view.findViewById(R.id.score_list_recycle_view);
+        rankList = view.findViewById(R.id.rank_list_recycle_view);
     }
 
     private void setRecyclerView() {
         RankList rankListObject = StoreGamesRank
-                .getInstance(getContext(), "Speed_Match")
+                .getInstance(getContext(), sharedPreferencesName)
                 .getScoreList();
         RankListAdapter rankListAdapter = new RankListAdapter(rankListObject.getRankList());
 

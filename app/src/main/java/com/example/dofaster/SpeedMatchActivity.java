@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dofaster.fragment.SpeedMatchFragment;
-import com.example.dofaster.fragment.SpeedMatchScoreListFragment;
+import com.example.dofaster.fragment.RankListFragment;
 
 public class SpeedMatchActivity extends AppCompatActivity {
 
@@ -61,7 +61,7 @@ public class SpeedMatchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .add(R.id.speed_match_fragment, new SpeedMatchScoreListFragment())
+                        .add(R.id.speed_match_fragment, new RankListFragment())
                         .commit();
             }
         });

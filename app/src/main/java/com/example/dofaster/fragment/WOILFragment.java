@@ -18,13 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dofaster.R;
-import com.example.dofaster.RankList;
-import com.example.dofaster.StoreGamesRank;
-import com.example.dofaster.User;
+import com.example.dofaster.data.RankList;
+import com.example.dofaster.data.StoreGamesRank;
+import com.example.dofaster.data.User;
 
 import java.util.Random;
 
-public class WhichOneIsLargerFragment extends Fragment {
+public class WOILFragment extends Fragment {
 
     private final int LEFT_BUTTON = 0;
     private final int RIGHT_BUTTON = 1;

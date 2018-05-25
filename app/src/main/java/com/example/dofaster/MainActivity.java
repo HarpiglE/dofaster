@@ -7,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.dofaster.data.GamesInfo;
+import com.example.dofaster.fragment.RankListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +26,56 @@ public class MainActivity extends AppCompatActivity {
 
     private String usernameSt;
 
-    private ScoreListClickListener scoreListClickListener = new ScoreListClickListener() {
+    private MainActivityClickListener mainActivityClickListener = new MainActivityClickListener() {
         @Override
-        public void whichClicked(int id) {
+        public void whichClicked(int item, int id) {
+            Bundle bundle = new Bundle();
+            if (item == 0) {
+                switch (id) {
+                    case 0:
 
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                }
+            } else {
+                switch (id) {
+                    case 0:
+                        bundle.putInt("id", 0);
+                        bundle.putString("chalkboard_challenge", "chalkboard_challenge");
+                        RankListFragment fragmentZero = new RankListFragment();
+                        fragmentZero.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_main_container, fragmentZero)
+                                .addToBackStack(null)
+                                .commit();
+                        break;
+                    case 1:
+                        bundle.putInt("id", 1);
+                        bundle.putString("color_match", "color_match");
+                        RankListFragment fragmentOne = new RankListFragment();
+                        fragmentOne.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_main_container, fragmentOne)
+                                .addToBackStack(null)
+                                .commit();
+                        break;
+                    case 2:
+                        bundle.putInt("id", 2);
+                        bundle.putString("speed_match", "speed_match");
+                        RankListFragment fragmentTwo = new RankListFragment();
+                        fragmentTwo.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_main_container, fragmentTwo)
+                                .addToBackStack(null)
+                                .commit();
+                        break;
+                }
+            }
         }
     };
 
@@ -77,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureRecycleView() {
-        gamesAdapter = new GamesAdapter(gamesInfoList, scoreListClickListener);
+        gamesAdapter = new GamesAdapter(gamesInfoList, mainActivityClickListener);
         recyclerView.setAdapter(gamesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }

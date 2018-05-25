@@ -1,4 +1,4 @@
-package com.example.dofaster;
+package com.example.dofaster.data;
 
 import java.util.ArrayList;
 import java.util.List;
