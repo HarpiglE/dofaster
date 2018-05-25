@@ -2,7 +2,6 @@ package com.example.dofaster;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +57,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             gamePic = itemView.findViewById(R.id.game_pic);
-            scoreListIcon = itemView.findViewById(R.id.score_list);
+            scoreListIcon = itemView.findViewById(R.id.rank_list);
             gameTitle = itemView.findViewById(R.id.game_title);
             gameCaption = itemView.findViewById(R.id.game_caption);
 
