@@ -5,4 +5,6 @@
     <dimen name="sixteen_dp">16dp</dimen>
     <dimen name="forty_dp">40dp</dimen>
 
+    <dimen name="games_pic_height">160dp</dimen>
+
 </resources>

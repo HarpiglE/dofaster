@@ -6,11 +6,12 @@
     <string name="default_user_name">Unknown</string>
 
     <!-- Main Activity -->
-    <string name="speed_match">Speed Match</string>
-    <string name="which_one_is_larger">Which One Is Larger</string>
+    <string name="speed_match_title">چالش سرعت</string>
+    <string name="chalkboard_challenge_title">چالش تخته سیاه</string>
+    <string name="color_match_title">چالش رنگ</string>
     <string name="larger_than_1">54 > 21</string>
     <string name="larger_than_2">70 = 70</string>
-    <string name="user_name_hint">Enter your name</string>
+    <string name="user_name_hint">نام کاربری</string>
 
     <!-- Speed Match -->
     <string name="welcome_speed">Welcome To Speed Match\n%s!</string>
@@ -21,8 +22,11 @@
     <string name="time_is_up">Time\'s UP</string>
 
     <!-- Which One-->
-    <string name="welcome_which">Welcome To Which One Is Larger\n%s!</string>
-    <string name="equal_sign">=</string>
-    <string name="look_which">Which number in the buttons is\nLARGER?!</string>
+    <string name="chalkboard_challenge_caption">محاسبه کن و مقدار بیشتر رو انتخاب کن</string>
+    <string name="color_match_caption">معنی کلمه ی بالایی با رنگ کلمه ی پایینی رو مقایسه کن</string>
+    <string name="speed_match_caption">شکل ها و رنگ ها رو با هم مقایسه کن و گزینه درست رو انتخاب کن</string>
+    <string name="confirm">تأیید</string>
+    <string name="cancel">لغو</string>
+    <string name="welcome">کاربرِ %s خوش اومدی</string>
 
 </resources>

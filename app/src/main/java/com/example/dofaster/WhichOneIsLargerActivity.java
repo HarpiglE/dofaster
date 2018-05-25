@@ -26,40 +26,15 @@ public class WhichOneIsLargerActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        welcome = findViewById(R.id.which_one_welcome);
-        letsGo = findViewById(R.id.start_which_one);
-        scores = findViewById(R.id.which_one_scores_list);
+
     }
 
     private void setWelcomeMessage() {
-        userName = getIntent().getStringExtra("User_Name");
-        welcome.setText(getString(R.string.welcome_which, userName));
+//        userName = getIntent().getStringExtra("User_Name");
+//        welcome.setText(getString(R.string.welcome_which, userName));
     }
 
     private void configureButtons() {
-        letsGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                WhichOneIsLargerFragment whichOneIsLargerFragment = new WhichOneIsLargerFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("User_Name", userName);
-                whichOneIsLargerFragment.setArguments(bundle);
 
-                getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .add(R.id.which_one_fragment, whichOneIsLargerFragment)
-                        .commit();
-            }
-        });
-
-        scores.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .add(R.id.which_one_fragment, new WhichOneIsLargerScoreListFragment())
-                        .commit();
-            }
-        });
     }
 }
