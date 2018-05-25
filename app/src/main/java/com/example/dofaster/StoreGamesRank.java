@@ -2,32 +2,37 @@ package com.example.dofaster;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
-public class StoreWhichOneIsLargerScore {
+public class StoreGamesRank {
 
-    private static StoreWhichOneIsLargerScore instance = null;
+    private static StoreGamesRank instance = null;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    private StoreWhichOneIsLargerScore(Context context) {
-        sharedPreferences = context.getSharedPreferences("Which_One_Is_Larger_Rank_List", Context.MODE_PRIVATE);
+    private String sharedPreferencesName;
+
+    private StoreGamesRank(Context context, String sharedPreferencesName) {
+        this.sharedPreferencesName = sharedPreferencesName;
+        sharedPreferences = context.getSharedPreferences(
+                sharedPreferencesName,
+                Context.MODE_PRIVATE
+        );
         editor = sharedPreferences.edit();
         editor.apply();
     }
 
-    public static StoreWhichOneIsLargerScore getInstance(Context context) {
+    public static StoreGamesRank getInstance(Context context, String sharedPreferencesName) {
         if (instance == null) {
-            instance = new StoreWhichOneIsLargerScore(context);
+            instance = new StoreGamesRank(context, sharedPreferencesName);
         }
         return instance;
     }
 
     public RankList getScoreList() {
         Gson gson = new Gson();
-        String rankListJson = sharedPreferences.getString("Which_One_Is_Larger_Rank_List", null);
+        String rankListJson = sharedPreferences.getString(sharedPreferencesName, null);
         if (rankListJson == null) {
             return new RankList();
         }
@@ -37,7 +42,7 @@ public class StoreWhichOneIsLargerScore {
     public void setScoreList(RankList rankList) {
         Gson gson = new Gson();
         String rankListJson = gson.toJson(rankList, RankList.class);
-        editor.putString("Which_One_Is_Larger_Rank_List", rankListJson);
+        editor.putString(sharedPreferencesName, rankListJson);
         editor.apply();
     }
 }

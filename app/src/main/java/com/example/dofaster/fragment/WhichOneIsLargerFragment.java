@@ -1,4 +1,4 @@
-package com.example.dofaster;
+package com.example.dofaster.fragment;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -16,7 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.dofaster.R;
+import com.example.dofaster.RankList;
+import com.example.dofaster.StoreGamesRank;
+import com.example.dofaster.User;
 
 import java.util.Random;
 
@@ -250,11 +254,13 @@ public class WhichOneIsLargerFragment extends Fragment {
 
     private void updateBestScore() {
         User user = new User();
-        RankList rankList = StoreWhichOneIsLargerScore.getInstance(getContext()).getScoreList();
+        RankList rankList = StoreGamesRank
+                .getInstance(getContext(), "WOIL")
+                .getScoreList();
         user.setUserName(userName);
         user.setUserScore(points);
         rankList.addUser(user);
-        StoreWhichOneIsLargerScore.getInstance(getContext()).setScoreList(rankList);
+        StoreGamesRank.getInstance(getContext(), "WOIL").setScoreList(rankList);
     }
 
     private void configureButtons() {

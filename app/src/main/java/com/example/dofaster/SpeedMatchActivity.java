@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.dofaster.fragment.SpeedMatchFragment;
+import com.example.dofaster.fragment.SpeedMatchScoreListFragment;
+
 public class SpeedMatchActivity extends AppCompatActivity {
 
     private TextView welcome;

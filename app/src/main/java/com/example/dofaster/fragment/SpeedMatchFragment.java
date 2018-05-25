@@ -1,4 +1,4 @@
-package com.example.dofaster;
+package com.example.dofaster.fragment;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -16,6 +16,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.dofaster.R;
+import com.example.dofaster.RankList;
+import com.example.dofaster.StoreGamesRank;
+import com.example.dofaster.User;
 
 import java.util.Random;
 
@@ -300,11 +305,15 @@ public class SpeedMatchFragment extends Fragment {
 
     private void updateBestScore() {
         User user = new User();
-        RankList rankList = StoreSpeedMatchScore.getInstance(getContext()).getScoreList();
+        RankList rankList = StoreGamesRank
+                .getInstance(getContext(), "Speed_Match")
+                .getScoreList();
         user.setUserName(userName);
         user.setUserScore(points);
         rankList.addUser(user);
-        StoreSpeedMatchScore.getInstance(getContext()).setScoreList(rankList);
+        StoreGamesRank
+                .getInstance(getContext(), "Speed_Match")
+                .setScoreList(rankList);
     }
 
     private void alphaAnimation(TextView text, int value) {

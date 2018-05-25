@@ -1,4 +1,4 @@
-package com.example.dofaster;
+package com.example.dofaster.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.dofaster.R;
+import com.example.dofaster.RankList;
+import com.example.dofaster.RankListAdapter;
+import com.example.dofaster.StoreGamesRank;
+import com.example.dofaster.User;
+
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -22,7 +28,7 @@ public class WhichOneIsLargerScoreListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_score_list, container, false);
+        return inflater.inflate(R.layout.fragment_rank_list, container, false);
     }
 
     @Override
@@ -31,7 +37,9 @@ public class WhichOneIsLargerScoreListFragment extends Fragment {
 
         findView(view);
 
-        if (StoreWhichOneIsLargerScore.getInstance(getContext()).getScoreList().getRankList()
+        if (StoreGamesRank.getInstance(getContext(), "WOIL")
+                .getScoreList()
+                .getRankList()
                 .size() == 0) {
             Toast.makeText(getActivity(), getString(R.string.no_score), Toast.LENGTH_SHORT).show();
         } else {
@@ -44,7 +52,9 @@ public class WhichOneIsLargerScoreListFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        RankList rankListObject = StoreWhichOneIsLargerScore.getInstance(getContext()).getScoreList();
+        RankList rankListObject = StoreGamesRank
+                .getInstance(getContext(), "WOIL")
+                .getScoreList();
         RankListAdapter rankListAdapter = new RankListAdapter(rankListObject.getRankList());
 
         Comparator<User> comparator = new Comparator<User>() {
