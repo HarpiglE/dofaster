@@ -7,9 +7,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,24 +24,23 @@ import java.util.Random;
 
 public class WOILFragment extends Fragment {
 
-    private final int LEFT_BUTTON = 0;
-    private final int RIGHT_BUTTON = 1;
-    private final int EQUAL_BUTTON = 2;
+    private final int UP_CARD = 0;
+    private final int DOWN_CARD = 1;
+    private final int EQUAL_BTN = 2;
 
-    private TextView whichOneCaution;
-    private TextView whichOneTimer;
-    private TextView whichOnePoints;
-    private Button leftButton;
-    private Button rightButton;
     private Button equal;
-    private ImageView whichOneEvaluateSign;
+    private Button upCard;
+    private Button downCard;
+    private ImageView WOILEvaluateSign;
     private ImageView timerIcon;
     private ImageView pointsIcon;
-    private ConstraintLayout whichOneButtonsContainer;
+    private TextView WOILCaution;
+    private TextView WOILTimer;
+    private TextView WOILPoints;
 
-    private int whichOneBeginningTimerNumberInt = 2;
-    private int leftNumber = 0;
-    private int rightNumber = 0;
+    private int WOILBeginningTimerNumberInt = 2;
+    private int upNumber = 0;
+    private int downNumber = 0;
     private int points = 0;
 
     private boolean gameFinished = false;
@@ -54,54 +51,56 @@ public class WOILFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState
+    ) {
         if (getArguments() != null) {
             userName = getArguments().getString("User_Name");
         }
-
-        Log.i("TAG", "passed...");
-
-        return inflater.inflate(R.layout.fragment_which_one_is_larger, container, false);
+        return inflater.inflate(R.layout.fragment_woil, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         findViews(view);
-        startSpeedMatchBeginningTimer();
+        startWOILBeginningTimer();
     }
 
     private void findViews(View view) {
-        whichOneButtonsContainer = view.findViewById(R.id.which_one_buttons_container);
-        timerIcon = view.findViewById(R.id.which_one_timer_icon);
-        pointsIcon = view.findViewById(R.id.which_one_points_icon);
-        whichOneEvaluateSign = view.findViewById(R.id.which_one_evaluate_sign);
-        whichOneCaution = view.findViewById(R.id.which_one_caution);
-        whichOneTimer = view.findViewById(R.id.which_one_timer_value);
-        whichOnePoints = view.findViewById(R.id.which_one_points_value);
-        leftButton = view.findViewById(R.id.which_one_left_button);
-        rightButton = view.findViewById(R.id.which_one_right_button);
-        equal = view.findViewById(R.id.which_one_bottom_button);
+        timerIcon = view.findViewById(R.id.WOIL_time_icon);
+        pointsIcon = view.findViewById(R.id.WOIL_points_icon);
+        WOILEvaluateSign = view.findViewById(R.id.WOIL_evaluate_sign);
+        WOILCaution = view.findViewById(R.id.WOIL_caution);
+        WOILTimer = view.findViewById(R.id.WOIL_time_value);
+        WOILPoints = view.findViewById(R.id.WOIL_points_value);
+        upCard = view.findViewById(R.id.WOIL_up_card_view);
+        downCard = view.findViewById(R.id.WOIL_down_card_view);
+        equal = view.findViewById(R.id.WOIL_equal_btn);
     }
 
-    private void startSpeedMatchBeginningTimer() {
+    private void startWOILBeginningTimer() {
 
-        final int[] numbersShape = {R.drawable.one_sign, R.drawable.two_sign, R.drawable.three_sign};
+        final int[] numbersShape = {
+                R.drawable.one_sign, R.drawable.two_sign, R.drawable.three_sign
+        };
 
         countDownTimer = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
-                whichOneEvaluateSign.setImageResource(numbersShape[whichOneBeginningTimerNumberInt]);
+                WOILEvaluateSign.setImageResource(numbersShape[WOILBeginningTimerNumberInt]);
                 signAppear();
-                whichOneBeginningTimerNumberInt--;
+                WOILBeginningTimerNumberInt--;
             }
 
             @Override
             public void onFinish() {
-                whichOneButtonsContainer.setVisibility(View.VISIBLE);
-                whichOneCaution.setVisibility(View.INVISIBLE);
+                upCard.setEnabled(true);
+                downCard.setEnabled(true);
 
-                startWhichOneMainTimer();
+                startWOILMainTimer();
             }
         };
         countDownTimer.start();
@@ -109,14 +108,14 @@ public class WOILFragment extends Fragment {
 
     private void signAppear() {
         ObjectAnimator signIncreaseScaleX = ObjectAnimator.ofFloat(
-                whichOneEvaluateSign,
+                WOILEvaluateSign,
                 "scaleX",
                 0f, 1.5f, 1f
         );
         signIncreaseScaleX.setDuration(250);
 
         ObjectAnimator signIncreaseScaleY = ObjectAnimator.ofFloat(
-                whichOneEvaluateSign,
+                WOILEvaluateSign,
                 "scaleY",
                 0f, 1.5f, 1f
         );
@@ -139,14 +138,14 @@ public class WOILFragment extends Fragment {
 
     private void signDisAppear() {
         ObjectAnimator signDecreaseScaleX = ObjectAnimator.ofFloat(
-                whichOneEvaluateSign,
+                WOILEvaluateSign,
                 "scaleX",
                 1f, 1.5f, 0f
         );
         signDecreaseScaleX.setDuration(250);
 
         ObjectAnimator signDecreaseScaleY = ObjectAnimator.ofFloat(
-                whichOneEvaluateSign,
+                WOILEvaluateSign,
                 "scaleY",
                 1f, 1.5f, 0f
         );
@@ -157,17 +156,19 @@ public class WOILFragment extends Fragment {
         evaluateSignAnimationDecreaseScale.start();
     }
 
-    private void startWhichOneMainTimer() {
+    private void startWOILMainTimer() {
         generateOneLevel();
 
         countDownTimer = new CountDownTimer(31000, 1000) {
             @Override
             public void onTick(long l) {
-                alphaAnimation(whichOneTimer, (int) l / 1000 - 1);
+                alphaAnimation(WOILTimer, (int) l / 1000 - 1);
             }
 
             @Override
             public void onFinish() {
+                upCard.setEnabled(false);
+                downCard.setEnabled(false);
 
                 gameFinished = true;
 
@@ -175,8 +176,8 @@ public class WOILFragment extends Fragment {
                     updateBestScore();
                 }
 
-                whichOneCaution.setText(getString(R.string.time_is_up));
-                whichOneCaution.setVisibility(View.VISIBLE);
+                WOILCaution.setText(getString(R.string.time_is_up));
+                WOILCaution.setVisibility(View.VISIBLE);
 
                 iconAnimation(timerIcon);
             }
@@ -197,47 +198,47 @@ public class WOILFragment extends Fragment {
     }
 
     protected void generateOneLevel() {
-        leftNumber = generateInt();
-        rightNumber = generateInt();
-        leftButton.setText(String.valueOf(leftNumber));
-        rightButton.setText(String.valueOf(rightNumber));
+        upNumber = generateInt();
+        downNumber = generateInt();
+        upCard.setText(String.valueOf(upNumber));
+        downCard.setText(String.valueOf(downNumber));
     }
 
     protected void evaluate(int whatPressed) {
         switch (whatPressed) {
-            case LEFT_BUTTON:
-                if (leftNumber > rightNumber) {
+            case UP_CARD:
+                if (upNumber > downNumber) {
                     points++;
-                    alphaAnimation(whichOnePoints, points);
-                    whichOneEvaluateSign.setImageResource(R.drawable.correct_sign);
+                    alphaAnimation(WOILPoints, points);
+                    WOILEvaluateSign.setImageResource(R.drawable.correct_sign);
                     signAppear();
                     iconAnimation(pointsIcon);
                 } else {
-                    whichOneEvaluateSign.setImageResource(R.drawable.wrong_sign);
+                    WOILEvaluateSign.setImageResource(R.drawable.wrong_sign);
                     signAppear();
                 }
                 break;
-            case RIGHT_BUTTON:
-                if (leftNumber < rightNumber) {
+            case DOWN_CARD:
+                if (upNumber < downNumber) {
                     points++;
-                    alphaAnimation(whichOnePoints, points);
-                    whichOneEvaluateSign.setImageResource(R.drawable.correct_sign);
+                    alphaAnimation(WOILPoints, points);
+                    WOILEvaluateSign.setImageResource(R.drawable.correct_sign);
                     signAppear();
                     iconAnimation(pointsIcon);
                 } else {
-                    whichOneEvaluateSign.setImageResource(R.drawable.wrong_sign);
+                    WOILEvaluateSign.setImageResource(R.drawable.wrong_sign);
                     signAppear();
                 }
                 break;
-            case EQUAL_BUTTON:
-                if (leftNumber == rightNumber) {
+            case EQUAL_BTN:
+                if (upNumber == downNumber) {
                     points++;
-                    alphaAnimation(whichOnePoints, points);
-                    whichOneEvaluateSign.setImageResource(R.drawable.correct_sign);
+                    alphaAnimation(WOILPoints, points);
+                    WOILEvaluateSign.setImageResource(R.drawable.correct_sign);
                     signAppear();
                     iconAnimation(pointsIcon);
                 } else {
-                    whichOneEvaluateSign.setImageResource(R.drawable.wrong_sign);
+                    WOILEvaluateSign.setImageResource(R.drawable.wrong_sign);
                     signAppear();
                 }
                 break;
@@ -264,24 +265,24 @@ public class WOILFragment extends Fragment {
     }
 
     private void configureButtons() {
-        leftButton.setOnClickListener(new View.OnClickListener() {
+        upCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                evaluateAndContinueGame(LEFT_BUTTON);
+                evaluateAndContinueGame(UP_CARD);
             }
         });
 
-        rightButton.setOnClickListener(new View.OnClickListener() {
+        downCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                evaluateAndContinueGame(RIGHT_BUTTON);
+                evaluateAndContinueGame(DOWN_CARD);
             }
         });
 
         equal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                evaluateAndContinueGame(EQUAL_BUTTON);
+                evaluateAndContinueGame(EQUAL_BTN);
             }
         });
     }

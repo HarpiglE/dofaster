@@ -24,21 +24,21 @@ import com.example.dofaster.data.User;
 
 import java.util.Random;
 
-public class SpeedMatchFragment extends Fragment {
+public class SMFragment extends Fragment {
 
-    private LinearLayout speedMatchButtonsContainer;
-    private Button bothButton;
-    private Button oneOfThemButton;
-    private Button noOneButton;
-    private ImageView speedMatchPic;
-    private ImageView speedMatchEvaluateSign;
+    private LinearLayout SMButtonsContainer;
+    private Button bothBtn;
+    private Button oneBtn;
+    private Button noBtn;
+    private ImageView SMPic;
+    private ImageView SMEvaluateSign;
     private ImageView timerIcon;
     private ImageView pointsIcon;
-    private TextView speedMatchPoints;
-    private TextView speedMatchTimer;
-    private TextView caution;
+    private TextView SMPoints;
+    private TextView SMTimer;
+    private TextView SMCaution;
 
-    private int speedMatchBeginningTimerNumberInt = 2;
+    private int SMBeginningTimerNumberInt = 2;
     private int points = 0;
 
     private boolean gameFinished = false;
@@ -53,7 +53,7 @@ public class SpeedMatchFragment extends Fragment {
 
     private CountDownTimer countDownTimer;
 
-    public SpeedMatchFragment() {
+    public SMFragment() {
         // Required empty public constructor
     }
 
@@ -64,7 +64,7 @@ public class SpeedMatchFragment extends Fragment {
         if (getArguments() != null) {
             userName = getArguments().getString("User_Name");
         }
-        return inflater.inflate(R.layout.fragment_speed_match, container, false);
+        return inflater.inflate(R.layout.fragment_sm, container, false);
     }
 
     @Override
@@ -72,24 +72,24 @@ public class SpeedMatchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         findViews(view);
-        startSpeedMatchBeginningTimer();
+        startSMBeginningTimer();
     }
 
     private void findViews(@NonNull View view) {
-        speedMatchButtonsContainer = view.findViewById(R.id.speed_match_buttons_container);
-        bothButton = view.findViewById(R.id.both_btn);
-        oneOfThemButton = view.findViewById(R.id.one_of_them_btn);
-        noOneButton = view.findViewById(R.id.no_one_btn);
-        speedMatchPic = view.findViewById(R.id.speed_match_pic);
-        speedMatchEvaluateSign = view.findViewById(R.id.speed_match_evaluate_sign);
-        timerIcon = view.findViewById(R.id.speed_match_timer_icon);
-        pointsIcon = view.findViewById(R.id.speed_match_points_icon);
-        speedMatchPoints = view.findViewById(R.id.speed_match_points_value);
-        speedMatchTimer = view.findViewById(R.id.speed_match_timer_value);
-        caution = view.findViewById(R.id.speed_match_caution);
+        SMButtonsContainer = view.findViewById(R.id.SM_buttons_container);
+        bothBtn = view.findViewById(R.id.both_btn);
+        oneBtn = view.findViewById(R.id.one_of_them_btn);
+        noBtn = view.findViewById(R.id.no_one_btn);
+        SMPic = view.findViewById(R.id.SM_pic);
+        SMEvaluateSign = view.findViewById(R.id.SM_evaluate_sign);
+        timerIcon = view.findViewById(R.id.SM_time_icon);
+        pointsIcon = view.findViewById(R.id.SM_points_icon);
+        SMPoints = view.findViewById(R.id.SM_points_value);
+        SMTimer = view.findViewById(R.id.SM_time_value);
+        SMCaution = view.findViewById(R.id.SM_caution);
     }
 
-    private void startSpeedMatchBeginningTimer() {
+    private void startSMBeginningTimer() {
         changeShapeAndColor();
 
         final int[] numbersShape = {R.drawable.one_sign, R.drawable.two_sign, R.drawable.three_sign};
@@ -97,17 +97,18 @@ public class SpeedMatchFragment extends Fragment {
         countDownTimer = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
-                speedMatchEvaluateSign.setImageResource(numbersShape[speedMatchBeginningTimerNumberInt]);
+                SMEvaluateSign.setImageResource(numbersShape[SMBeginningTimerNumberInt]);
                 signAppear();
-                speedMatchBeginningTimerNumberInt--;
+                SMBeginningTimerNumberInt--;
             }
 
             @Override
             public void onFinish() {
-                speedMatchButtonsContainer.setVisibility(View.VISIBLE);
-                caution.setVisibility(View.GONE);
+                bothBtn.setEnabled(true);
+                oneBtn.setEnabled(true);
+                noBtn.setEnabled(true);
 
-                startSpeedMatchMainTimer();
+                startSMMainTimer();
                 changeShapeAndColor();
             }
         };
@@ -121,23 +122,23 @@ public class SpeedMatchFragment extends Fragment {
 
         switch (generateRandomShape()) {
             case 1:
-                speedMatchPic.setImageResource(R.drawable.circle);
+                SMPic.setImageResource(R.drawable.circle);
                 whichColorNow = generateRandomColor();
-                speedMatchPic.setColorFilter(Color.parseColor(whichColorNow));
+                SMPic.setColorFilter(Color.parseColor(whichColorNow));
                 whichShapeNow = "circle";
                 break;
 
             case 2:
-                speedMatchPic.setImageResource(R.drawable.diamond);
+                SMPic.setImageResource(R.drawable.diamond);
                 whichColorNow = generateRandomColor();
-                speedMatchPic.setColorFilter(Color.parseColor(whichColorNow));
+                SMPic.setColorFilter(Color.parseColor(whichColorNow));
                 whichShapeNow = "diamond";
                 break;
 
             case 3:
-                speedMatchPic.setImageResource(R.drawable.square);
+                SMPic.setImageResource(R.drawable.square);
                 whichColorNow = generateRandomColor();
-                speedMatchPic.setColorFilter(Color.parseColor(whichColorNow));
+                SMPic.setColorFilter(Color.parseColor(whichColorNow));
                 whichShapeNow = "square";
                 break;
         }
@@ -145,14 +146,14 @@ public class SpeedMatchFragment extends Fragment {
 
     private void signAppear() {
         ObjectAnimator signIncreaseScaleX = ObjectAnimator.ofFloat(
-                speedMatchEvaluateSign,
+                SMEvaluateSign,
                 "scaleX",
                 0f, 1.5f, 1f
         );
         signIncreaseScaleX.setDuration(250);
 
         ObjectAnimator signIncreaseScaleY = ObjectAnimator.ofFloat(
-                speedMatchEvaluateSign,
+                SMEvaluateSign,
                 "scaleY",
                 0f, 1.5f, 1f
         );
@@ -175,14 +176,14 @@ public class SpeedMatchFragment extends Fragment {
 
     private void signDisAppear() {
         ObjectAnimator signDecreaseScaleX = ObjectAnimator.ofFloat(
-                speedMatchEvaluateSign,
+                SMEvaluateSign,
                 "scaleX",
                 1f, 1.5f, 0f
         );
         signDecreaseScaleX.setDuration(250);
 
         ObjectAnimator signDecreaseScaleY = ObjectAnimator.ofFloat(
-                speedMatchEvaluateSign,
+                SMEvaluateSign,
                 "scaleY",
                 1f, 1.5f, 0f
         );
@@ -193,20 +194,24 @@ public class SpeedMatchFragment extends Fragment {
         evaluateSignAnimationDecreaseScale.start();
     }
 
-    private void startSpeedMatchMainTimer() {
+    private void startSMMainTimer() {
         countDownTimer = new CountDownTimer(31000, 1000) {
             @Override
             public void onTick(long l) {
-                alphaAnimation(speedMatchTimer, (int) l / 1000 - 1);
+                alphaAnimation(SMTimer, (int) l / 1000 - 1);
             }
 
             @Override
             public void onFinish() {
+                bothBtn.setEnabled(false);
+                oneBtn.setEnabled(false);
+                noBtn.setEnabled(false);
+
                 gameFinished = true;
 
-                speedMatchButtonsContainer.setVisibility(View.INVISIBLE);
-                caution.setText(getString(R.string.time_is_up));
-                caution.setVisibility(View.VISIBLE);
+                SMButtonsContainer.setVisibility(View.INVISIBLE);
+                SMCaution.setText(getString(R.string.time_is_up));
+                SMCaution.setVisibility(View.VISIBLE);
 
                 iconAnimation(timerIcon);
 
@@ -221,7 +226,7 @@ public class SpeedMatchFragment extends Fragment {
     }
 
     private void configureButtons() {
-        bothButton.setOnClickListener(new View.OnClickListener() {
+        bothBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 evaluate(0);
@@ -229,7 +234,7 @@ public class SpeedMatchFragment extends Fragment {
             }
         });
 
-        oneOfThemButton.setOnClickListener(new View.OnClickListener() {
+        oneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 evaluate(1);
@@ -237,7 +242,7 @@ public class SpeedMatchFragment extends Fragment {
             }
         });
 
-        noOneButton.setOnClickListener(new View.OnClickListener() {
+        noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 evaluate(2);
@@ -255,12 +260,12 @@ public class SpeedMatchFragment extends Fragment {
             case 0:
                 if (whichShapePrevious.equals(whichShapeNow) && whichColorPrevious.equals(whichColorNow)) {
                     points++;
-                    alphaAnimation(speedMatchPoints, points);
-                    speedMatchEvaluateSign.setImageResource(R.drawable.correct_sign);
+                    alphaAnimation(SMPoints, points);
+                    SMEvaluateSign.setImageResource(R.drawable.correct_sign);
                     signAppear();
                     iconAnimation(pointsIcon);
                 } else {
-                    speedMatchEvaluateSign.setImageResource(R.drawable.wrong_sign);
+                    SMEvaluateSign.setImageResource(R.drawable.wrong_sign);
                     signAppear();
                 }
                 break;
@@ -268,12 +273,12 @@ public class SpeedMatchFragment extends Fragment {
             case 1:
                 if (whichShapePrevious.equals(whichShapeNow) ^ whichColorPrevious.equals(whichColorNow)) {
                     points++;
-                    alphaAnimation(speedMatchPoints, points);
-                    speedMatchEvaluateSign.setImageResource(R.drawable.correct_sign);
+                    alphaAnimation(SMPoints, points);
+                    SMEvaluateSign.setImageResource(R.drawable.correct_sign);
                     signAppear();
                     iconAnimation(pointsIcon);
                 } else {
-                    speedMatchEvaluateSign.setImageResource(R.drawable.wrong_sign);
+                    SMEvaluateSign.setImageResource(R.drawable.wrong_sign);
                     signAppear();
                 }
                 break;
@@ -281,12 +286,12 @@ public class SpeedMatchFragment extends Fragment {
             case 2:
                 if (!whichShapePrevious.equals(whichShapeNow) && !whichColorPrevious.equals(whichColorNow)) {
                     points++;
-                    alphaAnimation(speedMatchPoints, points);
-                    speedMatchEvaluateSign.setImageResource(R.drawable.correct_sign);
+                    alphaAnimation(SMPoints, points);
+                    SMEvaluateSign.setImageResource(R.drawable.correct_sign);
                     signAppear();
                     iconAnimation(pointsIcon);
                 } else {
-                    speedMatchEvaluateSign.setImageResource(R.drawable.wrong_sign);
+                    SMEvaluateSign.setImageResource(R.drawable.wrong_sign);
                     signAppear();
                 }
                 break;

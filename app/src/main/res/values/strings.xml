@@ -19,14 +19,19 @@
     <string name="one_of_them">One Of Them</string>
     <string name="no_one">No One</string>
     <string name="look_speed">Look at the shape, carefully!</string>
-    <string name="time_is_up">Time\'s UP</string>
+    <string name="time_is_up">زمانت تموم شد!</string>
 
     <!-- Which One-->
     <string name="chalkboard_challenge_caption">محاسبه کن و مقدار بیشتر رو انتخاب کن</string>
-    <string name="color_match_caption">معنی کلمه ی بالایی با رنگ کلمه ی پایینی رو مقایسه کن</string>
+    <string name="color_match_caption">معنی کلمه ی بالایی رو با رنگ کلمه ی پایینی مقایسه کن</string>
     <string name="speed_match_caption">شکل ها و رنگ ها رو با هم مقایسه کن و گزینه درست رو انتخاب کن</string>
     <string name="confirm">تأیید</string>
     <string name="cancel">لغو</string>
     <string name="welcome">کاربرِ %s خوش اومدی</string>
+    <string name="equal">مساوی</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="WOIL_guide">مقدار بیشتر رو انتخاب کن</string>
+    <string name="SM_guide">شکل ها و رنگ ها رو با هم مقایسه کن</string>
 
 </resources>

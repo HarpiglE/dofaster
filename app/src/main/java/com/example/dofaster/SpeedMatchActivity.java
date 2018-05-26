@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.dofaster.fragment.SpeedMatchFragment;
+import com.example.dofaster.fragment.SMFragment;
 import com.example.dofaster.fragment.RankListFragment;
 
 public class SpeedMatchActivity extends AppCompatActivity {
@@ -44,14 +44,14 @@ public class SpeedMatchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                SpeedMatchFragment speedMatchFragment = new SpeedMatchFragment();
+                SMFragment SMFragment = new SMFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("User_Name", userName);
-                speedMatchFragment.setArguments(bundle);
+                SMFragment.setArguments(bundle);
 
                 getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .add(R.id.speed_match_fragment, speedMatchFragment)
+                        .add(R.id.speed_match_fragment, SMFragment)
                         .commit();
             }
         });

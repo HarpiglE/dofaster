@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/repeated_background"
+    android:clickable="true"
+    android:focusable="true">
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        android:rotation="180"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/WOIL_points_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/sixteen_dp"
+        android:layout_marginRight="@dimen/sixteen_dp"
+        android:background="@color/buttons_bg"
+        android:padding="@dimen/sixteen_dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/WOIL_time_container"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/WOIL_points_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/points_icon"
+            android:tint="@color/icons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/WOIL_points_value"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/WOIL_points_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/english"
+            android:text="0"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/WOIL_points_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/WOIL_time_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginStart="@dimen/sixteen_dp"
+        android:background="@color/buttons_bg"
+        android:padding="@dimen/sixteen_dp"
+        app:layout_constraintLeft_toRightOf="@id/WOIL_points_container"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/WOIL_time_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/timer_icon"
+            android:tint="@color/icons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/WOIL_time_value"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/WOIL_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/english"
+            android:text="30"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/WOIL_time_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/WOIL_caution"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/sixteen_dp"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginRight="@dimen/sixteen_dp"
+        android:layout_marginStart="@dimen/sixteen_dp"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/WOIL_guide"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/WOIL_first_card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/WOIL_time_container" />
+
+    <FrameLayout
+        android:id="@+id/WOIL_first_card"
+        android:layout_width="250dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="@dimen/sixteen_dp"
+        android:background="#aa000000"
+        android:padding="@dimen/eight_dp"
+        app:layout_constraintBottom_toTopOf="@id/WOIL_second_card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/WOIL_caution">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/card_view"
+            app:cardCornerRadius="4dp">
+
+            <Button
+                android:id="@+id/WOIL_up_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:enabled="false"
+                android:fontFamily="@font/english"
+                android:gravity="center"
+                android:text="323"
+                android:textSize="35sp" />
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/WOIL_second_card"
+        android:layout_width="250dp"
+        android:layout_height="110dp"
+        android:layout_marginBottom="@dimen/sixteen_dp"
+        android:background="#aa000000"
+        android:padding="@dimen/eight_dp"
+        app:layout_constraintBottom_toTopOf="@id/WOIL_equal_btn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/WOIL_first_card">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/card_view"
+            app:cardCornerRadius="4dp">
+
+            <Button
+                android:id="@+id/WOIL_down_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:enabled="false"
+                android:fontFamily="@font/english"
+                android:gravity="center"
+                android:text="323"
+                android:textSize="35sp" />
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/WOIL_evaluate_sign"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/WOIL_second_card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/WOIL_first_card" />
+
+    <Button
+        android:id="@+id/WOIL_equal_btn"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:background="@color/buttons_bg"
+        android:enabled="false"
+        android:fontFamily="@font/dimaesfahan"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/equal"
+        android:textColor="@color/text"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

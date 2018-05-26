@@ -12,7 +12,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dofaster.data.GamesInfo;
+import com.example.dofaster.fragment.CMFragment;
 import com.example.dofaster.fragment.RankListFragment;
+import com.example.dofaster.fragment.SMFragment;
+import com.example.dofaster.fragment.WOILFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +36,25 @@ public class MainActivity extends AppCompatActivity {
             if (item == 0) {
                 switch (id) {
                     case 0:
-
+                        WOILFragment WOIL = new WOILFragment();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_main_container, WOIL)
+                                .addToBackStack(null)
+                                .commit();
                         break;
                     case 1:
-
+                        CMFragment CM = new CMFragment();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_main_container, CM)
+                                .addToBackStack(null)
+                                .commit();
                         break;
                     case 2:
-
+                        SMFragment SM = new SMFragment();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_main_container, SM)
+                                .addToBackStack(null)
+                                .commit();
                         break;
                 }
             } else {

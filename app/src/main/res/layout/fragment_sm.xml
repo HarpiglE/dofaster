@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/speed_match_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/repeated_background"
+    android:clickable="true"
+    android:focusable="true">
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        android:rotation="180"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/SM_points_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/sixteen_dp"
+        android:layout_marginRight="@dimen/sixteen_dp"
+        android:background="@color/buttons_bg"
+        android:padding="@dimen/sixteen_dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/SM_time_container"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/SM_points_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/points_icon"
+            android:tint="@color/icons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/SM_points_value"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/SM_points_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/english"
+            android:text="0"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/SM_points_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/SM_time_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginStart="@dimen/sixteen_dp"
+        android:background="@color/buttons_bg"
+        android:padding="@dimen/sixteen_dp"
+        app:layout_constraintLeft_toRightOf="@id/SM_points_container"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/SM_time_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/timer_icon"
+            android:tint="@color/icons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/SM_time_value"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/SM_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/english"
+            android:text="30"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/SM_time_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/SM_caution"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/sixteen_dp"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginRight="@dimen/sixteen_dp"
+        android:layout_marginStart="@dimen/sixteen_dp"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/eight_dp"
+        android:lineSpacingMultiplier="1"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/SM_guide"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/SM_pic_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SM_time_container" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/SM_pic_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="100dp"
+        app:cardBackgroundColor="@color/card_view"
+        app:cardCornerRadius="@dimen/eight_dp"
+        app:layout_constraintBottom_toTopOf="@id/SM_buttons_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SM_caution">
+
+        <ImageView
+            android:id="@+id/SM_pic"
+            android:layout_width="275dp"
+            android:layout_height="275dp"
+            android:padding="25dp" />
+
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/SM_evaluate_sign"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:elevation="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SM_caution"
+        app:layout_constraintVertical_bias="1" />
+
+    <LinearLayout
+        android:id="@+id/SM_buttons_container"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/eight_dp"
+            android:layout_marginRight="@dimen/eight_dp"
+            android:layout_weight="1"
+            android:background="@color/buttons_bg"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/both_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/both"
+                android:layout_alignEnd="@id/both"
+                android:layout_alignLeft="@+id/both"
+                android:layout_alignRight="@+id/both"
+                android:layout_alignStart="@id/both"
+                android:layout_alignTop="@id/both"
+                android:background="@null" />
+
+            <LinearLayout
+                android:id="@+id/both"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/twenty_four_dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/circle"
+                    android:tint="@color/text" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/eight_dp"
+            android:layout_marginLeft="@dimen/eight_dp"
+            android:layout_marginRight="@dimen/eight_dp"
+            android:layout_marginStart="@dimen/eight_dp"
+            android:layout_weight="1"
+            android:background="@color/buttons_bg"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/one_of_them_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/one_of_them"
+                android:layout_alignEnd="@id/one_of_them"
+                android:layout_alignLeft="@+id/one_of_them"
+                android:layout_alignRight="@+id/one_of_them"
+                android:layout_alignStart="@id/one_of_them"
+                android:layout_alignTop="@id/one_of_them"
+                android:background="@null" />
+
+            <LinearLayout
+                android:id="@+id/one_of_them"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/twenty_four_dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/circle_contrast" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/eight_dp"
+            android:layout_marginStart="@dimen/eight_dp"
+            android:layout_weight="1"
+            android:background="@color/buttons_bg"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/no_one_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/no_one"
+                android:layout_alignEnd="@id/no_one"
+                android:layout_alignLeft="@+id/no_one"
+                android:layout_alignRight="@+id/no_one"
+                android:layout_alignStart="@id/no_one"
+                android:layout_alignTop="@id/no_one"
+                android:background="@null" />
+
+            <ImageView
+                android:id="@id/no_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/twenty_four_dp"
+                android:src="@drawable/circle_outline" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

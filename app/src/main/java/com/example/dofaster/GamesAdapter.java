@@ -2,6 +2,7 @@ package com.example.dofaster;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,8 +71,8 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         @SuppressLint("ResourceType")
         @Override
         public void onClick(View v) {
-//            Log.i("TAG", "" + v.getId());
-            if (v.getId() == 2131230775) {
+//            Log.i("TAG", "" + v.toString());
+            if (v.toString().contains("game_pic")) {
                 // Handling game picture clicks which calls item 0
                 switch (getAdapterPosition()) {
                     case 0:

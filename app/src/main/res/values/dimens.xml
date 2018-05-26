@@ -3,6 +3,7 @@
 
     <dimen name="eight_dp">8dp</dimen>
     <dimen name="sixteen_dp">16dp</dimen>
+    <dimen name="twenty_four_dp">24dp</dimen>
     <dimen name="forty_dp">40dp</dimen>
 
     <dimen name="games_pic_height">160dp</dimen>
