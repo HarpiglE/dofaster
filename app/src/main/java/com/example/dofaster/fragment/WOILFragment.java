@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,8 @@ public class WOILFragment extends Fragment {
     private TextView WOILTimer;
     private TextView WOILPoints;
 
+    private int levelDifficultyDeadline;
+    private int levelDifficultyCounter = 0;
     private int WOILBeginningTimerNumberInt = 2;
     private int upNumber = 0;
     private int downNumber = 0;
@@ -45,9 +48,10 @@ public class WOILFragment extends Fragment {
 
     private boolean gameFinished = false;
 
-    CountDownTimer countDownTimer;
+    private CountDownTimer countDownTimer;
 
     private String userName;
+    private String[] operationList = {"+", "-", "\u00F7", "\u00D7"};
 
     @Nullable
     @Override
@@ -99,6 +103,7 @@ public class WOILFragment extends Fragment {
             public void onFinish() {
                 upCard.setEnabled(true);
                 downCard.setEnabled(true);
+                equal.setEnabled(true);
 
                 startWOILMainTimer();
             }
@@ -157,6 +162,8 @@ public class WOILFragment extends Fragment {
     }
 
     private void startWOILMainTimer() {
+        levelDifficultyDeadline = generateInt(3, 4);
+
         generateOneLevel();
 
         countDownTimer = new CountDownTimer(31000, 1000) {
@@ -169,6 +176,7 @@ public class WOILFragment extends Fragment {
             public void onFinish() {
                 upCard.setEnabled(false);
                 downCard.setEnabled(false);
+                equal.setEnabled(false);
 
                 gameFinished = true;
 
@@ -187,21 +195,39 @@ public class WOILFragment extends Fragment {
         configureButtons();
     }
 
-    protected int generateInt() {
+    protected int generateInt(int base, int add) {
         Random random = new Random();
-        int number = random.nextInt();
-        number %= 100;
-        if (number < 0) {
-            number *= -1;
-        }
-        return number;
+        return random.nextInt(base) + add;
     }
 
     protected void generateOneLevel() {
-        upNumber = generateInt();
-        downNumber = generateInt();
-        upCard.setText(String.valueOf(upNumber));
-        downCard.setText(String.valueOf(downNumber));
+        if (levelDifficultyCounter < levelDifficultyDeadline) {
+            upNumber = generateInt(100, 0);
+            downNumber = generateInt(100, 0);
+
+            upCard.setText(String.valueOf(upNumber));
+            downCard.setText(String.valueOf(downNumber));
+
+            levelDifficultyCounter++;
+        } else {
+            // Set UP card numbers for evaluate and expression strings for show
+            if (generateInt(10, 1) <= 6) {
+                upNumber = generateExpression(upCard, 2);
+            } else if (generateInt(10, 1) == 10) {
+                upNumber = generateExpression(upCard, 1);
+            } else {
+                upNumber = generateExpression(upCard, 3);
+            }
+
+            // Set DOWN card numbers for evaluate and expression strings for show
+            if (generateInt(10, 1) <= 6) {
+                downNumber = generateExpression(downCard, 2);
+            } else if (generateInt(10, 1) == 10) {
+                downNumber = generateExpression(downCard, 1);
+            } else {
+                downNumber = generateExpression(downCard, 3);
+            }
+        }
     }
 
     protected void evaluate(int whatPressed) {
@@ -332,6 +358,103 @@ public class WOILFragment extends Fragment {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(shakeThat, scaleXThat, scaleYThat);
         animatorSet.start();
+    }
+
+    private int generateExpression(Button card, int difficulty) {
+        String expression = "";
+
+        int number = 0;
+        int firstNumber = generateInt(30, 1);
+        int secondNumber = generateInt(30, 1);
+        int thirdNumber = generateInt(20, 1);
+
+        if (difficulty == 1) {
+
+            number = generateInt(100, 0);
+            card.setText(String.valueOf(number));
+            return number;
+
+        } else if (difficulty == 2) {
+
+            switch (operationList[generateInt(4, 0)]) {
+                case "+":
+                    expression = String.valueOf(firstNumber + " + " + secondNumber);
+                    card.setText(expression);
+                    number = firstNumber + secondNumber;
+                    break;
+                case "-":
+                    expression = String.valueOf(firstNumber + " - " + secondNumber);
+                    card.setText(expression);
+                    number = firstNumber - secondNumber;
+                    break;
+                case "\u00F7":
+                    expression = String.valueOf(firstNumber + " \u00F7 " + secondNumber);
+                    card.setText(expression);
+                    number = firstNumber / secondNumber;
+                    break;
+                case "\u00D7":
+                    expression = String.valueOf(firstNumber + " \u00D7 " + secondNumber);
+                    card.setText(expression);
+                    number = firstNumber * secondNumber;
+                    break;
+            }
+
+            return number;
+
+        } else {
+
+            switch (operationList[generateInt(4, 0)]) {
+                case "+":
+                    expression = String.valueOf(
+                            "(" + firstNumber + " + " + secondNumber + ")"
+                    );
+                    number = firstNumber + secondNumber;
+                    break;
+                case "-":
+                    expression = String.valueOf(
+                            "(" + firstNumber + " + " + secondNumber + ")"
+                    );
+                    number = firstNumber - secondNumber;
+                    break;
+                case "\u00F7":
+                    expression = String.valueOf(
+                            "(" + firstNumber + " + " + secondNumber + ")"
+                    );
+                    number = firstNumber / secondNumber;
+                    break;
+                case "\u00D7":
+                    expression = String.valueOf(
+                            "(" + firstNumber + " + " + secondNumber + ")"
+                    );
+                    number = firstNumber * secondNumber;
+                    break;
+            }
+
+            switch (operationList[generateInt(4, 0)]) {
+                case "+":
+                    expression = expression + String.valueOf(" + " + thirdNumber);
+                    card.setText(expression);
+                    number = number + thirdNumber;
+                    break;
+                case "-":
+                    expression = expression + String.valueOf(" - " + thirdNumber);
+                    card.setText(expression);
+                    number = number - thirdNumber;
+                    break;
+                case "\u00F7":
+                    expression = expression + String.valueOf(" \u00F7 " + thirdNumber);
+                    card.setText(expression);
+                    number = number / thirdNumber;
+                    break;
+                case "\u00D7":
+                    expression = expression + String.valueOf(" \u00D7 " + thirdNumber);
+                    card.setText(expression);
+                    number = number * thirdNumber;
+                    break;
+            }
+
+            return number;
+        }
     }
 
     @Override
