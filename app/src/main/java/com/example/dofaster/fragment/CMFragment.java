@@ -64,6 +64,9 @@ public class CMFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState
     ) {
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+        }
         return inflater.inflate(R.layout.fragment_cm, container, false);
     }
 

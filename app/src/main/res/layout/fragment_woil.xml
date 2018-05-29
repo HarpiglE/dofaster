@@ -97,7 +97,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/CM_caution"
+        android:id="@+id/WOIL_caution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/sixteen_dp"
@@ -127,7 +127,7 @@
         app:layout_constraintBottom_toTopOf="@id/WOIL_second_card"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/CM_caution">
+        app:layout_constraintTop_toBottomOf="@id/WOIL_caution">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"

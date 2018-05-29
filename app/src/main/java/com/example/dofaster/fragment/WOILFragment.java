@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class WOILFragment extends Fragment {
 
     private CountDownTimer countDownTimer;
 
-    private String userName;
+    private String username;
     private String[] operationList = {"+", "-", "\u00F7", "\u00D7"};
 
     @Nullable
@@ -59,7 +60,7 @@ public class WOILFragment extends Fragment {
                              @Nullable Bundle savedInstanceState
     ) {
         if (getArguments() != null) {
-            userName = getArguments().getString("User_Name");
+            username = getArguments().getString("username");
         }
         return inflater.inflate(R.layout.fragment_woil, container, false);
     }
@@ -76,7 +77,7 @@ public class WOILFragment extends Fragment {
         timerIcon = view.findViewById(R.id.WOIL_time_icon);
         pointsIcon = view.findViewById(R.id.WOIL_points_icon);
         WOILEvaluateSign = view.findViewById(R.id.WOIL_evaluate_sign);
-        WOILCaution = view.findViewById(R.id.CM_caution);
+        WOILCaution = view.findViewById(R.id.WOIL_caution);
         WOILTimer = view.findViewById(R.id.WOIL_time_value);
         WOILPoints = view.findViewById(R.id.WOIL_points_value);
         upCard = view.findViewById(R.id.WOIL_up_card_view);
@@ -271,9 +272,6 @@ public class WOILFragment extends Fragment {
     }
 
     protected void evaluateAndContinueGame(int whatPressed) {
-        if (gameFinished) {
-            return;
-        }
         evaluate(whatPressed);
         generateOneLevel();
     }
@@ -283,7 +281,7 @@ public class WOILFragment extends Fragment {
         RankList rankList = StoreGamesRank
                 .getInstance(getContext(), "WOIL")
                 .getScoreList();
-        user.setUserName(userName);
+        user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
         StoreGamesRank.getInstance(getContext(), "WOIL").setScoreList(rankList);

@@ -13,7 +13,6 @@ import java.util.List;
 public class RankListAdapter extends RecyclerView.Adapter<RankListAdapter.ViewHolder> {
 
     private List<User> rankList;
-    private int rankCounter = 1;
 
     public RankListAdapter(List<User> rankList) {
         this.rankList = rankList;
@@ -27,7 +26,7 @@ public class RankListAdapter extends RecyclerView.Adapter<RankListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(RankListAdapter.ViewHolder holder, int position) {
-        holder.rankNum.setText(String.valueOf(rankCounter++));
+        holder.rankNum.setText(String.valueOf(position + 1));
         holder.userName.setText(String.valueOf(rankList.get(position).getUserName()));
         holder.userScore.setText(String.valueOf(rankList.get(position).getUserScore()));
     }

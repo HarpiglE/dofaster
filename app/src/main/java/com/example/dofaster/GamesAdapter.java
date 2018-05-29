@@ -71,7 +71,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         @SuppressLint("ResourceType")
         @Override
         public void onClick(View v) {
-//            Log.i("TAG", "" + v.toString());
             if (v.toString().contains("game_pic")) {
                 // Handling game picture clicks which calls item 0
                 switch (getAdapterPosition()) {
@@ -79,7 +78,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
                         mainActivityClickListener.whichClicked(0, 0);
                         break;
                     case 1:
-//                        Log.i("TAG", "man");
                         mainActivityClickListener.whichClicked(0, 1);
                         break;
                     case 2:
@@ -97,7 +95,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
                         break;
                     case 2:
                         mainActivityClickListener.whichClicked(1, 2);
-//                        Log.i("TAG", "to");
                         break;
                 }
             }

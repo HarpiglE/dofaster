@@ -43,7 +43,7 @@ public class SMFragment extends Fragment {
 
     private boolean gameFinished = false;
 
-    private String userName;
+    private String username;
     private String whichShapePrevious;
     private String whichColorPrevious;
     private String whichShapeNow = null;
@@ -62,7 +62,7 @@ public class SMFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (getArguments() != null) {
-            userName = getArguments().getString("User_Name");
+            username = getArguments().getString("username");
         }
         return inflater.inflate(R.layout.fragment_sm, container, false);
     }
@@ -313,7 +313,7 @@ public class SMFragment extends Fragment {
         RankList rankList = StoreGamesRank
                 .getInstance(getContext(), "Speed_Match")
                 .getScoreList();
-        user.setUserName(userName);
+        user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
         StoreGamesRank

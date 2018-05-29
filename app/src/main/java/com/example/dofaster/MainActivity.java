@@ -1,12 +1,14 @@
 package com.example.dofaster;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText username;
 
+    private String usernameSt;
+
     private AlertDialog dialog;
     private AlertDialog.Builder builder;
-
-    private String usernameSt;
 
     private MainActivityClickListener mainActivityClickListener = new MainActivityClickListener() {
         @Override
@@ -36,21 +38,27 @@ public class MainActivity extends AppCompatActivity {
             if (item == 0) {
                 switch (id) {
                     case 0:
+                        bundle.putString("username", usernameSt);
                         WOILFragment WOIL = new WOILFragment();
+                        WOIL.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction()
                                 .add(R.id.fragment_main_container, WOIL)
                                 .addToBackStack(null)
                                 .commit();
                         break;
                     case 1:
+                        bundle.putString("username", usernameSt);
                         CMFragment CM = new CMFragment();
+                        CM.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction()
                                 .add(R.id.fragment_main_container, CM)
                                 .addToBackStack(null)
                                 .commit();
                         break;
                     case 2:
+                        bundle.putString("username", usernameSt);
                         SMFragment SM = new SMFragment();
+                        SM.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction()
                                 .add(R.id.fragment_main_container, SM)
                                 .addToBackStack(null)
@@ -166,6 +174,9 @@ public class MainActivity extends AppCompatActivity {
                                 getString(R.string.welcome, usernameSt),
                                 Toast.LENGTH_SHORT)
                                 .show();
+
+                        usernameSt = username.getText().toString();
+                        Log.i("dialog TAG", "" + usernameSt);
                     }
                 });
         builder.setCancelable(false);
