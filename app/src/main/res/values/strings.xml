@@ -33,5 +33,6 @@
     <string name="no">خیر</string>
     <string name="WOIL_guide">مقدار بیشتر رو انتخاب کن</string>
     <string name="SM_guide">شکل ها و رنگ ها رو با هم مقایسه کن</string>
+    <string name="dialog_title">نام خود را وارد کنید</string>
 
 </resources>

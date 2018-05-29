@@ -92,7 +92,9 @@ public class SMFragment extends Fragment {
     private void startSMBeginningTimer() {
         changeShapeAndColor();
 
-        final int[] numbersShape = {R.drawable.one_sign, R.drawable.two_sign, R.drawable.three_sign};
+        final int[] numbersShape = {
+                R.drawable.one_sign, R.drawable.two_sign, R.drawable.three_sign
+        };
 
         countDownTimer = new CountDownTimer(4000, 1000) {
             @Override
@@ -258,7 +260,8 @@ public class SMFragment extends Fragment {
 
         switch (button) {
             case 0:
-                if (whichShapePrevious.equals(whichShapeNow) && whichColorPrevious.equals(whichColorNow)) {
+                if (whichShapePrevious
+                        .equals(whichShapeNow) && whichColorPrevious.equals(whichColorNow)) {
                     points++;
                     alphaAnimation(SMPoints, points);
                     SMEvaluateSign.setImageResource(R.drawable.correct_sign);
@@ -271,7 +274,8 @@ public class SMFragment extends Fragment {
                 break;
 
             case 1:
-                if (whichShapePrevious.equals(whichShapeNow) ^ whichColorPrevious.equals(whichColorNow)) {
+                if (whichShapePrevious
+                        .equals(whichShapeNow) ^ whichColorPrevious.equals(whichColorNow)) {
                     points++;
                     alphaAnimation(SMPoints, points);
                     SMEvaluateSign.setImageResource(R.drawable.correct_sign);
@@ -284,7 +288,8 @@ public class SMFragment extends Fragment {
                 break;
 
             case 2:
-                if (!whichShapePrevious.equals(whichShapeNow) && !whichColorPrevious.equals(whichColorNow)) {
+                if (!whichShapePrevious
+                        .equals(whichShapeNow) && !whichColorPrevious.equals(whichColorNow)) {
                     points++;
                     alphaAnimation(SMPoints, points);
                     SMEvaluateSign.setImageResource(R.drawable.correct_sign);
@@ -310,15 +315,12 @@ public class SMFragment extends Fragment {
 
     private void updateBestScore() {
         User user = new User();
-        RankList rankList = StoreGamesRank
-                .getInstance(getContext(), "Speed_Match")
-                .getScoreList();
+        StoreGamesRank.changeSharedPreferencesName("speed_match");
+        RankList rankList = StoreGamesRank.getInstance(getContext()).getScoreList();
         user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
-        StoreGamesRank
-                .getInstance(getContext(), "Speed_Match")
-                .setScoreList(rankList);
+        StoreGamesRank.getInstance(getContext()).setScoreList(rankList);
     }
 
     private void alphaAnimation(TextView text, int value) {

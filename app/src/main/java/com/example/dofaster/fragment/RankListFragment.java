@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,11 +59,9 @@ public class RankListFragment extends Fragment {
 
         findView(view);
 
-        if (StoreGamesRank
-                .getInstance(getContext(), sharedPreferencesName)
-                .getScoreList()
-                .getRankList()
-                .size() == 0) {
+        StoreGamesRank.changeSharedPreferencesName(sharedPreferencesName);
+
+        if (StoreGamesRank.getInstance(getContext()).getScoreList().getRankList().size() == 0) {
             Toast.makeText(getActivity(), getString(R.string.no_score), Toast.LENGTH_SHORT).show();
         } else {
             setRecyclerView();
@@ -74,9 +73,7 @@ public class RankListFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        RankList rankListObject = StoreGamesRank
-                .getInstance(getContext(), sharedPreferencesName)
-                .getScoreList();
+        RankList rankListObject = StoreGamesRank.getInstance(getContext()).getScoreList();
         RankListAdapter rankListAdapter = new RankListAdapter(rankListObject.getRankList());
 
         Comparator<User> comparator = new Comparator<User>() {

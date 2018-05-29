@@ -20,7 +20,8 @@ public class RankListAdapter extends RecyclerView.Adapter<RankListAdapter.ViewHo
 
     @Override
     public RankListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ranklist_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.ranklist_item, parent, false);
         return new ViewHolder(view);
     }
 

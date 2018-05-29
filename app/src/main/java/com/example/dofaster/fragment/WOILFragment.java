@@ -278,13 +278,12 @@ public class WOILFragment extends Fragment {
 
     private void updateBestScore() {
         User user = new User();
-        RankList rankList = StoreGamesRank
-                .getInstance(getContext(), "WOIL")
-                .getScoreList();
+        StoreGamesRank.changeSharedPreferencesName("chalkboard_challenge");
+        RankList rankList = StoreGamesRank.getInstance(getContext()).getScoreList();
         user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
-        StoreGamesRank.getInstance(getContext(), "WOIL").setScoreList(rankList);
+        StoreGamesRank.getInstance(getContext()).setScoreList(rankList);
     }
 
     private void configureButtons() {

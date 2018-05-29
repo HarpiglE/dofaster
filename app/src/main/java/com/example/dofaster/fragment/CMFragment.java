@@ -188,6 +188,8 @@ public class CMFragment extends Fragment {
                     updateBestScore();
                 }
 
+
+
                 CMCaution.setText(getString(R.string.time_is_up));
                 iconAnimation(timerIcon);
             }
@@ -249,13 +251,12 @@ public class CMFragment extends Fragment {
 
     private void updateBestScore() {
         User user = new User();
-        RankList rankList = StoreGamesRank
-                .getInstance(getContext(), "Color_Match")
-                .getScoreList();
+        StoreGamesRank.changeSharedPreferencesName("color_match");
+        RankList rankList = StoreGamesRank.getInstance(getContext()).getScoreList();
         user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
-        StoreGamesRank.getInstance(getContext(), "Color_Match").setScoreList(rankList);
+        StoreGamesRank.getInstance(getContext()).setScoreList(rankList);
     }
 
     private void configureButtons() {

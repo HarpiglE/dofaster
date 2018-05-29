@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Setup Dialog
         builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("نام خود را وارد کنید");
+        builder.setTitle(getString(R.string.dialog_title));
         builder.setView(username);
         builder.setPositiveButton(getString(R.string.confirm),
                 new DialogInterface.OnClickListener() {
@@ -176,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
                                 .show();
 
                         usernameSt = username.getText().toString();
-                        Log.i("dialog TAG", "" + usernameSt);
                     }
                 });
         builder.setCancelable(false);
