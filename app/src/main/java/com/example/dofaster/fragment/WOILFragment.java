@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +76,7 @@ public class WOILFragment extends Fragment {
         timerIcon = view.findViewById(R.id.WOIL_time_icon);
         pointsIcon = view.findViewById(R.id.WOIL_points_icon);
         WOILEvaluateSign = view.findViewById(R.id.WOIL_evaluate_sign);
-        WOILCaution = view.findViewById(R.id.WOIL_caution);
+        WOILCaution = view.findViewById(R.id.CM_caution);
         WOILTimer = view.findViewById(R.id.WOIL_time_value);
         WOILPoints = view.findViewById(R.id.WOIL_points_value);
         upCard = view.findViewById(R.id.WOIL_up_card_view);
