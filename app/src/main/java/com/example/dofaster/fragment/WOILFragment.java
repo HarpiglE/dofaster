@@ -38,6 +38,8 @@ public class WOILFragment extends Fragment {
     private TextView WOILCaution;
     private TextView WOILTimer;
     private TextView WOILPoints;
+    private TextView scorePopup;
+    private View scorePopupBg;
 
     private int levelDifficultyDeadline;
     private int levelDifficultyCounter = 0;
@@ -45,8 +47,6 @@ public class WOILFragment extends Fragment {
     private int upNumber = 0;
     private int downNumber = 0;
     private int points = 0;
-
-    private boolean gameFinished = false;
 
     private CountDownTimer countDownTimer;
 
@@ -83,6 +83,8 @@ public class WOILFragment extends Fragment {
         upCard = view.findViewById(R.id.WOIL_up_card_view);
         downCard = view.findViewById(R.id.WOIL_down_card_view);
         equal = view.findViewById(R.id.WOIL_equal_btn);
+        scorePopupBg = view.findViewById(R.id.WOIL_score_popup_bg);
+        scorePopup = view.findViewById(R.id.WOIL_score_popup);
     }
 
     private void startWOILBeginningTimer() {
@@ -178,16 +180,18 @@ public class WOILFragment extends Fragment {
                 downCard.setEnabled(false);
                 equal.setEnabled(false);
 
-                gameFinished = true;
-
                 if (points != 0) {
                     updateBestScore();
+                    scorePopup.setText(getString(R.string.score_popup, points));
+                } else {
+                    scorePopup.setText(getString(R.string.no_score_popup));
                 }
 
                 WOILCaution.setText(getString(R.string.time_is_up));
-                WOILCaution.setVisibility(View.VISIBLE);
 
                 iconAnimation(timerIcon);
+                alphaAnimation(scorePopupBg);
+                popupAnimation(scorePopup);
             }
         };
         countDownTimer.start();
@@ -309,6 +313,16 @@ public class WOILFragment extends Fragment {
         });
     }
 
+    private void alphaAnimation(View view) {
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                view,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(500);
+        increaseAlpha.start();
+    }
+
     private void alphaAnimation(TextView text, int value) {
         ObjectAnimator decreaseAlpha = ObjectAnimator.ofFloat(
                 text,
@@ -346,13 +360,41 @@ public class WOILFragment extends Fragment {
 
         ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
                 icon,
-                "scaleX",
+                "scaleY",
                 1f, 1.3f, 1f
         );
         scaleYThat.setDuration(500);
 
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(shakeThat, scaleXThat, scaleYThat);
+        animatorSet.start();
+    }
+
+    private void popupAnimation(TextView text) {
+        ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
+                text,
+                "scaleX",
+                0f, 1f, 0.90f, 1f
+        );
+        scaleXThat.setDuration(750);
+
+        ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
+                text,
+                "scaleY",
+                0f, 1f, 0.90f, 1f
+        );
+        scaleYThat.setDuration(750);
+
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                text,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(250);
+        increaseAlpha.start();
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
         animatorSet.start();
     }
 

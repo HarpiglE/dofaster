@@ -12,6 +12,8 @@
     <color name="icons">#f9b234</color>
     <color name="card_view">#fffaf0</color>
     <color name="buttons_bg">#aa060e21</color>
+    <color name="score_popup_stroke">#060e21</color>
+    <color name="score_popup_bg">#cc000000</color>
     <color name="black">#000000</color>
 
 

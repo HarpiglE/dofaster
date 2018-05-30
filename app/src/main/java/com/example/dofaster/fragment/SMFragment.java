@@ -26,7 +26,6 @@ import java.util.Random;
 
 public class SMFragment extends Fragment {
 
-    private LinearLayout SMButtonsContainer;
     private Button bothBtn;
     private Button oneBtn;
     private Button noBtn;
@@ -37,6 +36,8 @@ public class SMFragment extends Fragment {
     private TextView SMPoints;
     private TextView SMTimer;
     private TextView SMCaution;
+    private TextView scorePopup;
+    private View scorePopupBg;
 
     private int SMBeginningTimerNumberInt = 2;
     private int points = 0;
@@ -76,7 +77,6 @@ public class SMFragment extends Fragment {
     }
 
     private void findViews(@NonNull View view) {
-        SMButtonsContainer = view.findViewById(R.id.SM_buttons_container);
         bothBtn = view.findViewById(R.id.both_btn);
         oneBtn = view.findViewById(R.id.one_of_them_btn);
         noBtn = view.findViewById(R.id.no_one_btn);
@@ -87,6 +87,8 @@ public class SMFragment extends Fragment {
         SMPoints = view.findViewById(R.id.SM_points_value);
         SMTimer = view.findViewById(R.id.SM_time_value);
         SMCaution = view.findViewById(R.id.SM_caution);
+        scorePopup = view.findViewById(R.id.SM_score_popup);
+        scorePopupBg = view.findViewById(R.id.SM_score_popup_bg);
     }
 
     private void startSMBeginningTimer() {
@@ -209,17 +211,18 @@ public class SMFragment extends Fragment {
                 oneBtn.setEnabled(false);
                 noBtn.setEnabled(false);
 
-                gameFinished = true;
-
-                SMButtonsContainer.setVisibility(View.INVISIBLE);
-                SMCaution.setText(getString(R.string.time_is_up));
-                SMCaution.setVisibility(View.VISIBLE);
-
-                iconAnimation(timerIcon);
-
                 if (points != 0) {
                     updateBestScore();
+                    scorePopup.setText(getString(R.string.score_popup, points));
+                } else {
+                    scorePopup.setText(getString(R.string.no_score_popup));
                 }
+
+                SMCaution.setText(getString(R.string.time_is_up));
+
+                iconAnimation(timerIcon);
+                alphaAnimation(scorePopupBg);
+                popupAnimation(scorePopup);
             }
         };
         countDownTimer.start();
@@ -323,6 +326,16 @@ public class SMFragment extends Fragment {
         StoreGamesRank.getInstance(getContext()).setScoreList(rankList);
     }
 
+    private void alphaAnimation(View view) {
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                view,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(500);
+        increaseAlpha.start();
+    }
+
     private void alphaAnimation(TextView text, int value) {
         ObjectAnimator decreaseAlpha = ObjectAnimator.ofFloat(
                 text,
@@ -360,13 +373,41 @@ public class SMFragment extends Fragment {
 
         ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
                 icon,
-                "scaleX",
+                "scaleY",
                 1f, 1.3f, 1f
         );
         scaleYThat.setDuration(500);
 
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(shakeThat, scaleXThat, scaleYThat);
+        animatorSet.start();
+    }
+
+    private void popupAnimation(TextView text) {
+        ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
+                text,
+                "scaleX",
+                0f, 1f, 0.90f, 1f
+        );
+        scaleXThat.setDuration(750);
+
+        ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
+                text,
+                "scaleY",
+                0f, 1f, 0.90f, 1f
+        );
+        scaleYThat.setDuration(750);
+
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                text,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(250);
+        increaseAlpha.start();
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
         animatorSet.start();
     }
 

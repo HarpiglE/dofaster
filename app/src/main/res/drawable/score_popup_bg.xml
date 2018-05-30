@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <padding
+        android:right="@dimen/twenty_four_dp"
+        android:top="@dimen/twenty_four_dp"
+        android:left="@dimen/twenty_four_dp"
+        android:bottom="@dimen/twenty_four_dp"/>
+    <stroke
+        android:color="@color/score_popup_stroke"
+        android:width="5dp"/>
+    <solid android:color="@color/card_view"/>
+</shape>

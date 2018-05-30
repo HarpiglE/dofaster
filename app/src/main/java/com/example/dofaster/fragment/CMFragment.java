@@ -39,6 +39,8 @@ public class CMFragment extends Fragment {
     private TextView CMCaution;
     private TextView CMTimer;
     private TextView CMPoints;
+    private TextView scorePopup;
+    private View scorePopupBg;
 
     private int points = 0;
 
@@ -89,6 +91,8 @@ public class CMFragment extends Fragment {
         downCard = view.findViewById(R.id.CM_down_card_view);
         yesBtn = view.findViewById(R.id.CM_yes_btn);
         noBtn = view.findViewById(R.id.CM_no_btn);
+        scorePopup = view.findViewById(R.id.CM_score_popup);
+        scorePopupBg = view.findViewById(R.id.CM_score_popup_bg);
     }
 
     private void startCMBeginningTimer() {
@@ -186,12 +190,19 @@ public class CMFragment extends Fragment {
 
                 if (points != 0) {
                     updateBestScore();
+                    scorePopup.setText(getString(R.string.score_popup, points));
+                } else {
+                    scorePopup.setText(getString(R.string.no_score_popup));
                 }
 
+                // Add if because of a unknown crash!
+                if (isAdded()) {
+                    CMCaution.setText(getString(R.string.time_is_up));
 
-
-                CMCaution.setText(getString(R.string.time_is_up));
-                iconAnimation(timerIcon);
+                    iconAnimation(timerIcon);
+                    alphaAnimation(scorePopupBg);
+                    popupAnimation(scorePopup);
+                }
             }
         };
         countDownTimer.start();
@@ -275,6 +286,16 @@ public class CMFragment extends Fragment {
         });
     }
 
+    private void alphaAnimation(View view) {
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                view,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(500);
+        increaseAlpha.start();
+    }
+
     private void alphaAnimation(TextView text, int value) {
         ObjectAnimator decreaseAlpha = ObjectAnimator.ofFloat(
                 text,
@@ -312,13 +333,41 @@ public class CMFragment extends Fragment {
 
         ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
                 icon,
-                "scaleX",
+                "scaleY",
                 1f, 1.3f, 1f
         );
         scaleYThat.setDuration(500);
 
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(shakeThat, scaleXThat, scaleYThat);
+        animatorSet.start();
+    }
+
+    private void popupAnimation(TextView text) {
+        ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
+                text,
+                "scaleX",
+                0f, 1f, 0.90f, 1f
+        );
+        scaleXThat.setDuration(750);
+
+        ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
+                text,
+                "scaleY",
+                0f, 1f, 0.90f, 1f
+        );
+        scaleYThat.setDuration(750);
+
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                text,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(250);
+        increaseAlpha.start();
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
         animatorSet.start();
     }
 }
