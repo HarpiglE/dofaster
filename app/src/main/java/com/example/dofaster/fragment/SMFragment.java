@@ -9,12 +9,13 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dofaster.R;
@@ -219,10 +220,10 @@ public class SMFragment extends Fragment {
                 }
 
                 SMCaution.setText(getString(R.string.time_is_up));
-
                 iconAnimation(timerIcon);
                 alphaAnimation(scorePopupBg);
-                popupAnimation(scorePopup);
+                popupAppearAnimation(scorePopup);
+                transactionToRankListFragment();
             }
         };
         countDownTimer.start();
@@ -383,7 +384,7 @@ public class SMFragment extends Fragment {
         animatorSet.start();
     }
 
-    private void popupAnimation(TextView text) {
+    private void popupAppearAnimation(TextView text) {
         ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
                 text,
                 "scaleX",
@@ -409,6 +410,36 @@ public class SMFragment extends Fragment {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
         animatorSet.start();
+    }
+
+    private void transactionToRankListFragment() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                    Log.i("Game TAG", "back stack cleared!");
+                }
+
+                RankListFragment rankListFragment = new RankListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", 2);
+                bundle.putString("speed_match", "speed_match");
+                rankListFragment.setArguments(bundle);
+                try {
+
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_main_container, rankListFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    Log.i("Game TAG", "new fragment commited");
+
+                } catch (NullPointerException e) {
+
+                }
+            }
+        }, 4500);
     }
 
     @Override

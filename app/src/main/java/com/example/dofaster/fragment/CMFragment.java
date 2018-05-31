@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -198,10 +198,10 @@ public class CMFragment extends Fragment {
                 // Add if because of a unknown crash!
                 if (isAdded()) {
                     CMCaution.setText(getString(R.string.time_is_up));
-
                     iconAnimation(timerIcon);
                     alphaAnimation(scorePopupBg);
-                    popupAnimation(scorePopup);
+                    popupAppearAnimation(scorePopup);
+                    transactionToRankListFragment();
                 }
             }
         };
@@ -210,17 +210,17 @@ public class CMFragment extends Fragment {
         configureButtons();
     }
 
-    protected int generateInt(int base, int add) {
+    protected int generateInt(int base) {
         Random random = new Random();
-        return random.nextInt(base) + add;
+        return random.nextInt(base);
     }
 
     private void generateOneLevel() {
-        colorNameIndex = generateInt(4, 0);
-        colorCodeIndex = generateInt(4, 0);
+        colorNameIndex = generateInt(4);
+        colorCodeIndex = generateInt(4);
 
         upCard.setText(colorsName[colorNameIndex]);
-        downCard.setText(colorsName[generateInt(4, 0)]);
+        downCard.setText(colorsName[generateInt(4)]);
         downCard.setTextColor(colorsCode[colorCodeIndex]);
 
     }
@@ -343,7 +343,7 @@ public class CMFragment extends Fragment {
         animatorSet.start();
     }
 
-    private void popupAnimation(TextView text) {
+    private void popupAppearAnimation(TextView text) {
         ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
                 text,
                 "scaleX",
@@ -369,5 +369,33 @@ public class CMFragment extends Fragment {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
         animatorSet.start();
+    }
+
+    private void transactionToRankListFragment() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                }
+
+                RankListFragment rankListFragment = new RankListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", 1);
+                bundle.putString("color_match", "color_match");
+                rankListFragment.setArguments(bundle);
+                try {
+
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_main_container, rankListFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+                } catch (NullPointerException e) {
+
+                }
+            }
+        }, 4500);
     }
 }

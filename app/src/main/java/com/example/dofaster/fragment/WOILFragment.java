@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -188,10 +189,10 @@ public class WOILFragment extends Fragment {
                 }
 
                 WOILCaution.setText(getString(R.string.time_is_up));
-
                 iconAnimation(timerIcon);
                 alphaAnimation(scorePopupBg);
-                popupAnimation(scorePopup);
+                popupAppearAnimation(scorePopup);
+                transactionToRankListFragment();
             }
         };
         countDownTimer.start();
@@ -370,7 +371,7 @@ public class WOILFragment extends Fragment {
         animatorSet.start();
     }
 
-    private void popupAnimation(TextView text) {
+    private void popupAppearAnimation(TextView text) {
         ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
                 text,
                 "scaleX",
@@ -493,6 +494,34 @@ public class WOILFragment extends Fragment {
 
             return number;
         }
+    }
+
+    private void transactionToRankListFragment() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                }
+
+                RankListFragment rankListFragment = new RankListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", 0);
+                bundle.putString("chalkboard_challenge", "chalkboard_challenge");
+                rankListFragment.setArguments(bundle);
+                try {
+
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_main_container, rankListFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+                } catch (NullPointerException e) {
+
+                }
+            }
+        }, 4500);
     }
 
     @Override
