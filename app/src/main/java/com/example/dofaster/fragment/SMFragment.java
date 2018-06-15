@@ -1,5 +1,6 @@
 package com.example.dofaster.fragment;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
@@ -34,6 +35,7 @@ public class SMFragment extends Fragment {
     private ImageView SMEvaluateSign;
     private ImageView timerIcon;
     private ImageView pointsIcon;
+    private ImageView bestScoreSign;
     private TextView SMPoints;
     private TextView SMTimer;
     private TextView SMCaution;
@@ -43,7 +45,7 @@ public class SMFragment extends Fragment {
     private int SMBeginningTimerNumberInt = 2;
     private int points = 0;
 
-    private boolean gameFinished = false;
+    private boolean isBestScore = false;
 
     private String username;
     private String whichShapePrevious;
@@ -90,6 +92,7 @@ public class SMFragment extends Fragment {
         SMCaution = view.findViewById(R.id.SM_caution);
         scorePopup = view.findViewById(R.id.SM_score_popup);
         scorePopupBg = view.findViewById(R.id.SM_score_popup_bg);
+        bestScoreSign = view.findViewById(R.id.SM_best_sign);
     }
 
     private void startSMBeginningTimer() {
@@ -222,7 +225,7 @@ public class SMFragment extends Fragment {
                 SMCaution.setText(getString(R.string.time_is_up));
                 iconAnimation(timerIcon);
                 alphaAnimation(scorePopupBg);
-                popupAppearAnimation(scorePopup);
+                popupAppearAnimation();
                 transactionToRankListFragment();
             }
         };
@@ -258,10 +261,6 @@ public class SMFragment extends Fragment {
     }
 
     private void evaluate(int button) {
-        if (gameFinished) {
-            return;
-        }
-
         switch (button) {
             case 0:
                 if (whichShapePrevious
@@ -321,6 +320,16 @@ public class SMFragment extends Fragment {
         User user = new User();
         StoreGamesRank.changeSharedPreferencesName("speed_match");
         RankList rankList = StoreGamesRank.getInstance(getContext()).getScoreList();
+
+        try {
+            if (points > rankList.getRankList().get(0).getUserScore()) {
+                isBestScore = true;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // Meaning the rank list has no element
+            isBestScore = true;
+        }
+
         user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
@@ -384,27 +393,80 @@ public class SMFragment extends Fragment {
         animatorSet.start();
     }
 
-    private void popupAppearAnimation(TextView text) {
+    private void popupAppearAnimation() {
         ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "scaleX",
                 0f, 1f, 0.90f, 1f
         );
         scaleXThat.setDuration(750);
 
         ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "scaleY",
                 0f, 1f, 0.90f, 1f
         );
         scaleYThat.setDuration(750);
 
         ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "alpha",
                 0f, 1f
         );
         increaseAlpha.setDuration(250);
+        increaseAlpha.start();
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
+        animatorSet.start();
+
+        if (isBestScore) {
+            animatorSet.addListener(new Animator.AnimatorListener() {
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    bestScoreSignAnimation();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+        }
+    }
+
+    private void bestScoreSignAnimation() {
+        ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "scaleX",
+                5f, 1f
+        );
+        scaleXThat.setDuration(400);
+
+        ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "scaleY",
+                5f, 1f
+        );
+        scaleYThat.setDuration(400);
+
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(200);
         increaseAlpha.start();
 
         AnimatorSet animatorSet = new AnimatorSet();
@@ -417,6 +479,7 @@ public class SMFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 if (getFragmentManager() != null) {
                     getFragmentManager().popBackStack();
                     Log.i("Game TAG", "back stack cleared!");
@@ -427,6 +490,7 @@ public class SMFragment extends Fragment {
                 bundle.putInt("id", 2);
                 bundle.putString("speed_match", "speed_match");
                 rankListFragment.setArguments(bundle);
+
                 try {
 
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -439,7 +503,7 @@ public class SMFragment extends Fragment {
 
                 }
             }
-        }, 4500);
+        }, 5000);
     }
 
     @Override

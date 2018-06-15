@@ -1,5 +1,6 @@
 package com.example.dofaster.fragment;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
@@ -9,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +36,7 @@ public class WOILFragment extends Fragment {
     private ImageView WOILEvaluateSign;
     private ImageView timerIcon;
     private ImageView pointsIcon;
+    private ImageView bestScoreSign;
     private TextView WOILCaution;
     private TextView WOILTimer;
     private TextView WOILPoints;
@@ -49,10 +50,13 @@ public class WOILFragment extends Fragment {
     private int downNumber = 0;
     private int points = 0;
 
-    private CountDownTimer countDownTimer;
-
     private String username;
     private String[] operationList = {"+", "-", "\u00F7", "\u00D7"};
+
+    private boolean isBestScore = false;
+
+    private CountDownTimer countDownTimer;
+
 
     @Nullable
     @Override
@@ -86,6 +90,7 @@ public class WOILFragment extends Fragment {
         equal = view.findViewById(R.id.WOIL_equal_btn);
         scorePopupBg = view.findViewById(R.id.WOIL_score_popup_bg);
         scorePopup = view.findViewById(R.id.WOIL_score_popup);
+        bestScoreSign = view.findViewById(R.id.WOIL_best_sign);
     }
 
     private void startWOILBeginningTimer() {
@@ -191,7 +196,7 @@ public class WOILFragment extends Fragment {
                 WOILCaution.setText(getString(R.string.time_is_up));
                 iconAnimation(timerIcon);
                 alphaAnimation(scorePopupBg);
-                popupAppearAnimation(scorePopup);
+                popupAppearAnimation();
                 transactionToRankListFragment();
             }
         };
@@ -285,6 +290,16 @@ public class WOILFragment extends Fragment {
         User user = new User();
         StoreGamesRank.changeSharedPreferencesName("chalkboard_challenge");
         RankList rankList = StoreGamesRank.getInstance(getContext()).getScoreList();
+
+        try {
+            if (points > rankList.getRankList().get(0).getUserScore()) {
+                isBestScore = true;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // Meaning the rank list has no element
+            isBestScore = true;
+        }
+
         user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
@@ -371,27 +386,80 @@ public class WOILFragment extends Fragment {
         animatorSet.start();
     }
 
-    private void popupAppearAnimation(TextView text) {
+    private void popupAppearAnimation() {
         ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "scaleX",
                 0f, 1f, 0.90f, 1f
         );
         scaleXThat.setDuration(750);
 
         ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "scaleY",
                 0f, 1f, 0.90f, 1f
         );
         scaleYThat.setDuration(750);
 
         ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "alpha",
                 0f, 1f
         );
         increaseAlpha.setDuration(250);
+        increaseAlpha.start();
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
+        animatorSet.start();
+
+        if (isBestScore) {
+            animatorSet.addListener(new Animator.AnimatorListener() {
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    bestScoreSignAnimation();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+        }
+    }
+
+    private void bestScoreSignAnimation() {
+        ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "scaleX",
+                5f, 1f
+        );
+        scaleXThat.setDuration(400);
+
+        ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "scaleY",
+                5f, 1f
+        );
+        scaleYThat.setDuration(400);
+
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(200);
         increaseAlpha.start();
 
         AnimatorSet animatorSet = new AnimatorSet();
@@ -501,6 +569,7 @@ public class WOILFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 if (getFragmentManager() != null) {
                     getFragmentManager().popBackStack();
                 }
@@ -510,6 +579,7 @@ public class WOILFragment extends Fragment {
                 bundle.putInt("id", 0);
                 bundle.putString("chalkboard_challenge", "chalkboard_challenge");
                 rankListFragment.setArguments(bundle);
+
                 try {
 
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -521,7 +591,7 @@ public class WOILFragment extends Fragment {
 
                 }
             }
-        }, 4500);
+        }, 5000);
     }
 
     @Override

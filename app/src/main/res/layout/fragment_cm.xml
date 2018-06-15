@@ -7,6 +7,34 @@
     android:clickable="true"
     android:focusable="true">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/CM_score_popup_left_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/CM_score_popup_right_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/CM_score_popup_sign_right_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/CM_score_popup_sign_top_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
     <View
         android:layout_width="200dp"
         android:layout_height="match_parent"
@@ -237,10 +265,6 @@
         android:id="@+id/CM_score_popup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/twenty_four_dp"
-        android:layout_marginLeft="@dimen/twenty_four_dp"
-        android:layout_marginRight="@dimen/twenty_four_dp"
-        android:layout_marginStart="@dimen/twenty_four_dp"
         android:alpha="0"
         android:background="@drawable/score_popup_bg"
         android:fontFamily="@font/dimaesfahan"
@@ -249,8 +273,23 @@
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/CM_score_popup_left_guide"
+        app:layout_constraintRight_toRightOf="@id/CM_score_popup_right_guide"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/CM_best_sign"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/eight_dp"
+        android:layout_marginLeft="@dimen/eight_dp"
+        android:layout_marginStart="@dimen/eight_dp"
+        android:alpha="0"
+        android:rotation="-25"
+        android:src="@drawable/best_score_sign"
+        app:layout_constraintBottom_toBottomOf="@id/CM_score_popup"
+        app:layout_constraintLeft_toLeftOf="@id/CM_score_popup"
+        app:layout_constraintRight_toRightOf="@id/CM_score_popup_sign_right_guide"
+        app:layout_constraintTop_toTopOf="@id/CM_score_popup_sign_top_guide" />
 
 </android.support.constraint.ConstraintLayout>

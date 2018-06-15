@@ -61,7 +61,10 @@ public class RankListFragment extends Fragment {
         StoreGamesRank.changeSharedPreferencesName(sharedPreferencesName);
 
         if (StoreGamesRank.getInstance(getContext()).getScoreList().getRankList().size() == 0) {
-            Toast.makeText(getActivity(), getString(R.string.no_score), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),
+                    getString(R.string.no_score),
+                    Toast.LENGTH_SHORT)
+                    .show();
         } else {
             setRecyclerView();
         }
@@ -88,6 +91,8 @@ public class RankListFragment extends Fragment {
             }
         };
         Collections.sort(rankListObject.getRankList(), comparator);
+
+        StoreGamesRank.getInstance(getContext()).setScoreList(rankListObject);
 
         rankList.setLayoutManager(new LinearLayoutManager(getActivity()));
         rankList.setAdapter(rankListAdapter);

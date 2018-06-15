@@ -1,5 +1,6 @@
 package com.example.dofaster.fragment;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
@@ -36,6 +37,7 @@ public class CMFragment extends Fragment {
     private ImageView CMEvaluateSign;
     private ImageView timerIcon;
     private ImageView pointsIcon;
+    private ImageView bestScoreSign;
     private TextView CMCaution;
     private TextView CMTimer;
     private TextView CMPoints;
@@ -56,6 +58,8 @@ public class CMFragment extends Fragment {
 
     private String username;
     private String[] colorsName = {"مشکی", "آبی", "سبز", "قرمز"};
+
+    private boolean isBestScore = false;
 
     private CountDownTimer countDownTimer;
 
@@ -93,6 +97,7 @@ public class CMFragment extends Fragment {
         noBtn = view.findViewById(R.id.CM_no_btn);
         scorePopup = view.findViewById(R.id.CM_score_popup);
         scorePopupBg = view.findViewById(R.id.CM_score_popup_bg);
+        bestScoreSign = view.findViewById(R.id.CM_best_sign);
     }
 
     private void startCMBeginningTimer() {
@@ -200,7 +205,7 @@ public class CMFragment extends Fragment {
                     CMCaution.setText(getString(R.string.time_is_up));
                     iconAnimation(timerIcon);
                     alphaAnimation(scorePopupBg);
-                    popupAppearAnimation(scorePopup);
+                    popupAppearAnimation();
                     transactionToRankListFragment();
                 }
             }
@@ -210,17 +215,17 @@ public class CMFragment extends Fragment {
         configureButtons();
     }
 
-    protected int generateInt(int base) {
+    protected int generateInt() {
         Random random = new Random();
-        return random.nextInt(base);
+        return random.nextInt(4);
     }
 
     private void generateOneLevel() {
-        colorNameIndex = generateInt(4);
-        colorCodeIndex = generateInt(4);
+        colorNameIndex = generateInt();
+        colorCodeIndex = generateInt();
 
         upCard.setText(colorsName[colorNameIndex]);
-        downCard.setText(colorsName[generateInt(4)]);
+        downCard.setText(colorsName[generateInt()]);
         downCard.setTextColor(colorsCode[colorCodeIndex]);
 
     }
@@ -264,6 +269,16 @@ public class CMFragment extends Fragment {
         User user = new User();
         StoreGamesRank.changeSharedPreferencesName("color_match");
         RankList rankList = StoreGamesRank.getInstance(getContext()).getScoreList();
+
+        try {
+            if (points > rankList.getRankList().get(0).getUserScore()) {
+                isBestScore = true;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // Meaning the rank list has no element
+            isBestScore = true;
+        }
+
         user.setUserName(username);
         user.setUserScore(points);
         rankList.addUser(user);
@@ -343,27 +358,80 @@ public class CMFragment extends Fragment {
         animatorSet.start();
     }
 
-    private void popupAppearAnimation(TextView text) {
+    private void popupAppearAnimation() {
         ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "scaleX",
                 0f, 1f, 0.90f, 1f
         );
         scaleXThat.setDuration(750);
 
         ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "scaleY",
                 0f, 1f, 0.90f, 1f
         );
         scaleYThat.setDuration(750);
 
         ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
-                text,
+                scorePopup,
                 "alpha",
                 0f, 1f
         );
         increaseAlpha.setDuration(250);
+        increaseAlpha.start();
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(scaleXThat, scaleYThat, increaseAlpha);
+        animatorSet.start();
+
+        if (isBestScore) {
+            animatorSet.addListener(new Animator.AnimatorListener() {
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    bestScoreSignAnimation();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+        }
+    }
+
+    private void bestScoreSignAnimation() {
+        ObjectAnimator scaleXThat = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "scaleX",
+                5f, 1f
+        );
+        scaleXThat.setDuration(400);
+
+        ObjectAnimator scaleYThat = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "scaleY",
+                5f, 1f
+        );
+        scaleYThat.setDuration(400);
+
+        ObjectAnimator increaseAlpha = ObjectAnimator.ofFloat(
+                bestScoreSign,
+                "alpha",
+                0f, 1f
+        );
+        increaseAlpha.setDuration(200);
         increaseAlpha.start();
 
         AnimatorSet animatorSet = new AnimatorSet();
@@ -396,6 +464,6 @@ public class CMFragment extends Fragment {
 
                 }
             }
-        }, 4500);
+        }, 5000);
     }
 }
