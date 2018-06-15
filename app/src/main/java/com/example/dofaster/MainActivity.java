@@ -165,15 +165,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         usernameSt = username.getText().toString();
+
                         if (usernameSt.equals("")) {
                             usernameSt = "ناشناس";
                         }
+
                         Toast.makeText(MainActivity.this,
                                 getString(R.string.welcome, usernameSt),
                                 Toast.LENGTH_SHORT)
                                 .show();
 
-                        usernameSt = username.getText().toString();
                     }
                 });
         builder.setCancelable(false);
