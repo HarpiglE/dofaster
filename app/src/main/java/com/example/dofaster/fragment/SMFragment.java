@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class SMFragment extends Fragment {
     private Button bothBtn;
     private Button oneBtn;
     private Button noBtn;
+    private CardView picContainer;
     private ImageView SMPic;
     private ImageView SMEvaluateSign;
     private ImageView timerIcon;
@@ -93,6 +95,7 @@ public class SMFragment extends Fragment {
         scorePopup = view.findViewById(R.id.SM_score_popup);
         scorePopupBg = view.findViewById(R.id.SM_score_popup_bg);
         bestScoreSign = view.findViewById(R.id.SM_best_sign);
+        picContainer = view.findViewById(R.id.SM_pic_container);
     }
 
     private void startSMBeginningTimer() {
@@ -117,7 +120,7 @@ public class SMFragment extends Fragment {
                 noBtn.setEnabled(true);
 
                 startSMMainTimer();
-                changeShapeAndColor();
+                cardAnimation();
             }
         };
 
@@ -239,7 +242,7 @@ public class SMFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 evaluate(0);
-                changeShapeAndColor();
+                cardAnimation();
             }
         });
 
@@ -247,7 +250,7 @@ public class SMFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 evaluate(1);
-                changeShapeAndColor();
+                cardAnimation();
             }
         });
 
@@ -255,7 +258,7 @@ public class SMFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 evaluate(2);
-                changeShapeAndColor();
+                cardAnimation();
             }
         });
     }
@@ -334,6 +337,69 @@ public class SMFragment extends Fragment {
         user.setUserScore(points);
         rankList.addUser(user);
         StoreGamesRank.getInstance(getContext()).setScoreList(rankList);
+    }
+
+    private void cardAnimation() {
+        ObjectAnimator positioning = ObjectAnimator.ofFloat(
+                picContainer,
+                "translationX",
+                0f, 200f
+        );
+        positioning.setDuration(250);
+
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(
+                picContainer,
+                "alpha",
+                1f, 0f
+        );
+        alpha.setDuration(250);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(positioning, alpha);
+        animatorSet.start();
+
+        animatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                changeShapeAndColor();
+                cardAppearAnimation();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
+    private void cardAppearAnimation() {
+        ObjectAnimator positioning = ObjectAnimator.ofFloat(
+                picContainer,
+                "translationX",
+                -200f, 0f
+        );
+        positioning.setDuration(250);
+
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(
+                picContainer,
+                "alpha",
+                0f, 1f
+        );
+        alpha.setDuration(250);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(positioning, alpha);
+        animatorSet.start();
     }
 
     private void alphaAnimation(View view) {
