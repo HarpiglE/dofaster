@@ -11,7 +11,7 @@ import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.dofaster.data.GamesInfo;
+import com.example.dofaster.model.GamesInfo;
 import com.example.dofaster.fragment.CMFragment;
 import com.example.dofaster.fragment.RankListFragment;
 import com.example.dofaster.fragment.SMFragment;
@@ -121,19 +121,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialGamesList() {
         GamesInfo chalkboardChallenge = new GamesInfo(
-                R.drawable.header,
+                R.drawable.abacus,
                 getString(R.string.chalkboard_challenge_title),
                 getString(R.string.chalkboard_challenge_caption)
         );
 
         GamesInfo colorMatch = new GamesInfo(
-                R.drawable.header,
+                R.drawable.watercolor,
                 getString(R.string.color_match_title),
                 getString(R.string.color_match_caption)
         );
 
         GamesInfo speedMatch = new GamesInfo(
-                R.drawable.header,
+                R.drawable.shape,
                 getString(R.string.speed_match_title),
                 getString(R.string.speed_match_caption)
         );

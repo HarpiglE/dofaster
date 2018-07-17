@@ -15,6 +15,7 @@
     <color name="score_popup_stroke">#060e21</color>
     <color name="score_popup_bg">#dd000000</color>
     <color name="black">#000000</color>
+    <color name="game_icon_bg">#dd009ac4</color>
 
 
     <color name="main_activity_edit_text">#aafffaf0</color>

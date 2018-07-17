@@ -1,8 +1,7 @@
-package com.example.dofaster.data;
+package com.example.dofaster.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dofaster.data.User;
+import com.example.dofaster.model.User;
 
 import java.util.List;
 

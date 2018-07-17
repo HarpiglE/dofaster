@@ -1,4 +1,4 @@
-package com.example.dofaster.data;
+package com.example.dofaster.model;
 
 public class User {
 

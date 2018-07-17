@@ -18,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dofaster.R;
-import com.example.dofaster.data.RankList;
-import com.example.dofaster.data.StoreGamesRank;
-import com.example.dofaster.data.User;
+import com.example.dofaster.model.RankList;
+import com.example.dofaster.model.StoreGamesRank;
+import com.example.dofaster.model.User;
 
 import java.util.Random;
 

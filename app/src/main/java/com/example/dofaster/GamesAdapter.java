@@ -2,14 +2,13 @@ package com.example.dofaster;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dofaster.data.GamesInfo;
+import com.example.dofaster.model.GamesInfo;
 
 import java.util.List;
 

@@ -1,8 +1,4 @@
-package com.example.dofaster.data;
-
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-import android.widget.TextView;
+package com.example.dofaster.model;
 
 public class GamesInfo {
 
