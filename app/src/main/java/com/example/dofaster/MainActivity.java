@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Gravity;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
 
     private EditText username;
 
@@ -110,13 +113,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViews();
+        configureActionBar();
         initialGamesList();
         configureRecycleView();
         configureDialog();
     }
 
     private void findViews() {
+        toolbar = findViewById(R.id.main_toolbar);
         recyclerView = findViewById(R.id.games_recycle_view);
+    }
+
+    private void configureActionBar() {
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getString(R.string.app_name));
+        }
     }
 
     private void initialGamesList() {
