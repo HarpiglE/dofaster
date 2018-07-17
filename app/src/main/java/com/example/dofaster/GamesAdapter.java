@@ -37,7 +37,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.gamePic.setImageResource(gamesInfoList.get(position).getGamePic());
         holder.gameTitle.setText(gamesInfoList.get(position).getGameTitle());
-        holder.gameCaption.setText(gamesInfoList.get(position).getGameCaption());
     }
 
     @Override
@@ -51,17 +50,17 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private ImageView gamePic;
         private ImageView scoreListIcon;
         private TextView gameTitle;
-        private TextView gameCaption;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             gamePic = itemView.findViewById(R.id.game_pic);
             scoreListIcon = itemView.findViewById(R.id.rank_list);
             gameTitle = itemView.findViewById(R.id.game_title);
-            gameCaption = itemView.findViewById(R.id.game_caption);
 
             gamePic.setOnClickListener(this);
             scoreListIcon.setOnClickListener(this);

@@ -4,12 +4,10 @@ public class GamesInfo {
 
     private int gamePic;
     private String gameTitle;
-    private String gameCaption;
 
-    public GamesInfo(int gamePic, String gameTitle, String gameCaption) {
+    public GamesInfo(int gamePic, String gameTitle) {
         this.gamePic = gamePic;
         this.gameTitle = gameTitle;
-        this.gameCaption = gameCaption;
     }
 
     public int getGamePic() {
@@ -19,9 +17,5 @@ public class GamesInfo {
 
     public String getGameTitle() {
         return gameTitle;
-    }
-
-    public String getGameCaption() {
-        return gameCaption;
     }
 }

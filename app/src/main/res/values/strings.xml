@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">Do Faster</string>
-    <string name="scores">Scores</string>
-    <string name="start">Let\'s GO</string>
     <string name="no_score">در حال حاضر امتیازی ثبت نشده است</string>
     <string name="default_user_name">Unknown</string>
 
     <!-- Main Activity -->
-    <string name="speed_match_title">چالش سرعت</string>
-    <string name="chalkboard_challenge_title">چالش تخته سیاه</string>
+    <string name="speed_match_title">چالش اشکال</string>
+    <string name="abacus_challenge_title">چالش چرتکه</string>
     <string name="color_match_title">چالش رنگ</string>
-    <string name="larger_than_1">54 > 21</string>
-    <string name="larger_than_2">70 = 70</string>
     <string name="user_name_hint">نام کاربری</string>
 
     <!-- Speed Match -->
@@ -22,7 +18,7 @@
     <string name="time_is_up">زمانت تموم شد!</string>
 
     <!-- Which One-->
-    <string name="chalkboard_challenge_caption">محاسبه کن و مقدار بیشتر رو انتخاب کن</string>
+    <string name="abacus_challenge_caption">محاسبه کن و مقدار بیشتر رو انتخاب کن</string>
     <string name="color_match_caption">معنی کلمه ی بالایی رو با رنگ کلمه ی پایینی مقایسه کن</string>
     <string name="speed_match_caption">شکل ها و رنگ ها رو با هم مقایسه کن و گزینه درست رو انتخاب کن</string>
     <string name="confirm">تأیید</string>

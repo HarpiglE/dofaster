@@ -122,20 +122,17 @@ public class MainActivity extends AppCompatActivity {
     private void initialGamesList() {
         GamesInfo chalkboardChallenge = new GamesInfo(
                 R.drawable.abacus,
-                getString(R.string.chalkboard_challenge_title),
-                getString(R.string.chalkboard_challenge_caption)
+                getString(R.string.abacus_challenge_title)
         );
 
         GamesInfo colorMatch = new GamesInfo(
                 R.drawable.watercolor,
-                getString(R.string.color_match_title),
-                getString(R.string.color_match_caption)
+                getString(R.string.color_match_title)
         );
 
         GamesInfo speedMatch = new GamesInfo(
                 R.drawable.shape,
-                getString(R.string.speed_match_title),
-                getString(R.string.speed_match_caption)
+                getString(R.string.speed_match_title)
         );
 
         gamesInfoList.add(chalkboardChallenge);
